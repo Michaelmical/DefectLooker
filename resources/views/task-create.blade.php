@@ -54,7 +54,7 @@
                                             <label>Severity</label>
                                             <select class="form-control select2bs4">
                                                 <option value="null" selected disabled></option>
-                                                <option value="test">{{ ucfirst('low') }}</option>
+                                                <option value="low">{{ ucfirst('low') }}</option>
                                                 <option value="test">{{ ucfirst('medium') }}</option>
                                                 <option value="test">{{ ucfirst('high') }}</option>
                                             </select>
