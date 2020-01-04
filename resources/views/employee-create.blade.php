@@ -1,8 +1,12 @@
 @extends('layouts.admin');
 
+@push('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endpush
 @push('ui')
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 @endpush
 
 @section('content')
@@ -17,56 +21,113 @@
                             <h3 class="card-title">Employee Details</h3>
                         </div>
                         <!-- /.card-header -->
+{{--                        @if ($message = Session::get('success'))--}}
+{{--                            <div class="alert alert-success alert-block">--}}
+{{--                                <button type="button" class="close" data-dismiss="alert">×</button>--}}
+{{--                                <strong>{{ $message }}</strong>--}}
+{{--                            </div>--}}
+{{--                            <img src="{{url('images')}}/{{ Session::get('image') }}">--}}
+{{--                        @endif--}}
+
+{{--                        @if (count($errors) > 0)--}}
+{{--                            <div class="alert alert-danger">--}}
+{{--                                <strong>Whoops!</strong> There were some problems with your input.--}}
+{{--                                <ul>--}}
+{{--                                    @foreach ($errors->all() as $error)--}}
+{{--                                        <li>{{ $error }}</li>--}}
+{{--                                    @endforeach--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                    @endif--}}
                         <!-- form start -->
-                        <form method="post" action="/employee">
+                        <form id="employeeadd" method="post" action="/employee" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputEmpNo">Employee Number</label>
-                                            <input type="number" class="form-control" id="inputEmpNo" placeholder="Enter employee number..">
+                                            <input type="number" class="form-control" name="inputEmpNo" placeholder="Enter employee number..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputLastName">Last Name</label>
-                                            <input type="text" class="form-control" id="inputLastName" placeholder="Enter last name..">
+                                            <input type="text" class="form-control" name="inputLastName" placeholder="Enter last name..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputFirstName">First Name</label>
-                                            <input type="text" class="form-control" id="inputFirstName" placeholder="Enter first name..">
+                                            <input type="text" class="form-control" name="inputFirstName" placeholder="Enter first name..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputMiddleName">Middle Name</label>
-                                            <input type="text" class="form-control" id="inputMiddleName" placeholder="Enter middle name..">
+                                            <input type="text" class="form-control" name="inputMiddleName" placeholder="Enter middle name..">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <!-- <label for="customFile">Custom File</label> -->
+                                            <label for="exampleInputFile">File Upload</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="customFile" name="image">
+                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Date Started</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary" id="btn-submit">Submit</button>
+                                <button type="submit" class="btn btn-primary" id="btn-submit">Add Employee</button>
                             </div>
                         </form>
                     </div>
                     <!-- /.card -->
+                </div>
             </div>
         </div>
     </section>
 @endsection
 
 @push('addons')
+    <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            bsCustomFileInput.init();
+        });
+    </script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
+    <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+    <script src="{{asset('plugins/moment/moment.min.js')}}"></script>
+    <script src="{{asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
     <script>
         $('.select2').select2();
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
+        //Datemask yyyy/mm/dd
+        $('#datemask').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
+        //Datemask2 yyyy/mm/dd
+        $('#datemask2').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
+        //Money Euro
+        $('[data-mask]').inputmask()
     </script>
 @endpush
 

@@ -37,7 +37,13 @@ class AuthController extends Controller
 //        $sFullname = $aEmpData['last_name'] . ', ' . $aEmpData['first_name'] . ' ' . $aEmpData['middle_name'];
 
         if (empty($aUserData) === false) {
-            session(['empid' => $aUserData['emp_id'], 'empno' => $aEmpData['emp_number'], 'grpid' => $aUserData['grp_id'], 'full_name' => $aEmpData['last_name']]);
+            session([
+                'empid' => $aUserData['emp_id'],
+                'empno' => $aEmpData['emp_number'],
+                'grpid' => $aUserData['grp_id'],
+                'full_name' => $aEmpData['last_name'],
+                'userImage' => $aEmpData['image_path']
+            ]);
             session()->save();
         }
 

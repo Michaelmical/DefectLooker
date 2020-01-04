@@ -36,10 +36,25 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
-        dump(request()->all());
+
+//        return response()->json($request);
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->image->move(public_path('images'), $imageName);
+
+        return back()
+
+            ->with('success','You have successfully upload image.')
+
+            ->with('image',$imageName);
     }
 
     /**

@@ -6,6 +6,7 @@
 
     <title>Defect LOOKER</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    @stack('meta')
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
@@ -42,7 +43,7 @@
 
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{  asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{  asset('images') }}/{{session('userImage')}}" class="img-circle elevation-0" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{  ucfirst(session('full_name')) }}</a>

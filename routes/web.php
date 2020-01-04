@@ -23,8 +23,8 @@ Route::get('/tasks', 'TaskController@index')->name('tasks');
 Route::get('/tasks/create', 'TaskController@create')->name('tasks-create');
 Route::get('/points', 'PointsController@index')->name('points');
 
-Route::get('/employee', 'EmployeeController@index')->name('employee');
-Route::post('/employee', 'EmployeeController@store')->name('employee.store');
-Route::get('/employee/create', 'EmployeeController@create')->name('employee-create');
+Route::get('employee', 'EmployeeController@index')->name('employee');
+Route::post('employee', 'EmployeeController@store')->name('employee.store');
+Route::get('employee/create', 'EmployeeController@create')->name('employee-create');
 
 
