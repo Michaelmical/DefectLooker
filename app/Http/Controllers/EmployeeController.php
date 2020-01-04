@@ -15,7 +15,8 @@ class EmployeeController extends Controller
     public function index()
     {
         //
-        return view('employee');
+        $empData = employee::all();
+        return view('employee', ['employees' => $empData]);
     }
 
     /**
@@ -35,9 +36,10 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
+        dump(request()->all());
     }
 
     /**
