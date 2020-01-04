@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\Task;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task-create');
+        ;
+        return view('task-create', ['aProjectData' => Project::all()]);
     }
 
     /**

@@ -2,18 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8bfbe77-64cd-4c6d-8011-1d218374a011" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/employee-create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/employee.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/task-create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/task-create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -122,6 +120,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -168,13 +167,19 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="690" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578140499981" />
-    <state x="661" y="350" key="com.intellij.ide.util.TipDialog" timestamp="1578112646845">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="470" y="243" key="com.intellij.ide.util.TipDialog" timestamp="1578152807967">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="470" y="243" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1578152807967" />
     <state x="661" y="350" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578112646845" />
-    <state x="623" y="227" key="search.everywhere.popup" timestamp="1578143206407">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1578155448602">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="600" height="424" key="javadoc.popup/0.0.1366.728@0.0.1366.728" timestamp="1578155448602" />
+    <state x="443" y="157" width="672" height="678" key="search.everywhere.popup" timestamp="1578153858164">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="443" y="157" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1578153858164" />
     <state x="623" y="227" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1578143206407" />
   </component>
 </project>
