@@ -22,6 +22,7 @@ $(function () {
             this.oDtStart = $('#dtStarted');
             this.oDtCompleted = $('#dtCompleted');
             this.oTxtDesc = $('#txtdesc');
+            this.oOptEmployee = $('#optEmployee');
         },
 
         setElementEvents : function () {
@@ -37,11 +38,13 @@ $(function () {
             var sStartDate = task.oDtStart.val();
             var sCompletedDate = task.oDtCompleted.val();
             var sDesc = task.oTxtDesc.val();
+            var iEmpId = task.oOptEmployee.val();
 
             $.ajax({
                 url: '/tasks',
                 method: 'POST',
-                data:{
+                data : {
+                    iEmpId : iEmpId,
                     iBuildId : iBuildId,
                     sTaskId : sTaskId,
                     sIncType : sIncType,
@@ -65,11 +68,13 @@ $(function () {
             var sStartDate = task.oDtStart.val();
             var sCompletedDate = task.oDtCompleted.val();
             var sDesc = task.oTxtDesc.val();
+            var iEmpId = task.oOptEmployee.val();
 
             $.ajax({
                 url: '/tasks/' + sTaskId,
                 method: 'PUT',
                 data:{
+                    iEmpId : iEmpId,
                     iBuildId : iBuildId,
                     sTaskId : sTaskId,
                     sIncType : sIncType,

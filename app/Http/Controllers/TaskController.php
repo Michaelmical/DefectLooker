@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Build;
+use App\Employee;
 use App\Task;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -21,7 +22,9 @@ class TaskController extends Controller
 //        $userId = session('empid');
 //        $userData = Task::find($userId)->first();
 //        $empData = Employee::find($userData['emp_id'])->first();
-        return view('tasks', ['aTaskData' => DB::table('task')->join('build','task.build_id','=', 'build.build_id')->get()]);
+        return view('tasks', ['aTaskData' => DB::table('task')
+            ->join('build','task.build_id','=', 'build.build_id')
+            ->join('employee', 'task.emp_id', '=', 'employee.emp_id')->get()]);
     }
 
     /**
@@ -31,7 +34,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task-create', ['aBuildData' => Build::all()]);
+        return view('task-create', ['aBuildData' => Build::all(), 'aEmpData' => Employee::all()]);
     }
 
     /**
@@ -44,6 +47,7 @@ class TaskController extends Controller
     {
         request()->validate([
             'iBuildId'       => 'required',
+            'iEmpId'         => 'required',
             'sTaskId'        => 'required',
             'sIncType'       => 'required',
             'sSeverity'      => 'required',
@@ -59,7 +63,7 @@ class TaskController extends Controller
             'severity'     => $request->get('sSeverity'),
             'started_at'   => $request->get('sStartDate'),
             'completed_at' => $request->get('sCompletedDate'),
-            'emp_id'       => (int)session()->get('empid'),
+            'emp_id'       => $request->get('iEmpId'),
             'build_id'     => (int)$request->get('iBuildId')
         ]);
 
@@ -91,9 +95,11 @@ class TaskController extends Controller
     public function edit(Task $task, $taskid)
     {
         $aTaskData = Task::where('task_id', $taskid)->first();
+
         if (empty($aTaskData) === true) {
             return redirect()->route('tasks');
         }
+
         $aBuildData = Build::all();
         foreach ($aBuildData as $aData) {
             $aData['active'] = $aData['build_id'] === $aTaskData['build_id'] ? 'active' : '';
@@ -106,10 +112,24 @@ class TaskController extends Controller
             $aIncType[$aDataItem]['active'] = ($svalue['types'] === $aTaskData['inc_type']) ? 'active' : '';
         }
 
+        $aSeverity = [
+            ['type' => 'low'], ['type' => 'medium'], ['type' => 'high']
+        ];
+        foreach ($aSeverity as $aDataItem => $svalue) {
+            $aSeverity[$aDataItem]['active'] = ($svalue['type'] === $aTaskData['severity']) ? 'active' : '';
+        }
+
+        $aEmpData = Employee::all();
+        foreach ($aEmpData as $aEData) {
+            $aEData['active'] = $aEData['emp_id'] === $aTaskData['emp_id'] ? 'active' : '';
+        }
+
         return view('tasks-update', [
             'aBuildData' => $aBuildData,
             'aTaskData'  => $aTaskData,
-            'aIncType'   => (object)$aIncType
+            'aIncType'   => $aIncType,
+            'aSeverity'  => $aSeverity,
+            'aEmpData'   => $aEmpData
         ]);
     }
 
@@ -118,6 +138,7 @@ class TaskController extends Controller
     {
         request()->validate([
             'iBuildId'       => 'required',
+            'iEmpId'         => 'required',
             'sTaskId'        => 'required',
             'sIncType'       => 'required',
             'sSeverity'      => 'required',
@@ -133,6 +154,7 @@ class TaskController extends Controller
         $aData->started_at =  $request->get('sStartDate');
         $aData->completed_at =  $request->get('sCompletedDate');
         $aData->build_id =  $request->get('iBuildId');
+        $aData->emp_id =  $request->get('iEmpId');
         $aData->save();
 
         return response()->json($aData);
@@ -141,11 +163,14 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @param $taskid
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task, $taskid)
     {
-        //
+        $data = Task::findorfail($taskid);
+        $data->delete();
+        return response()->json($data);
     }
 }

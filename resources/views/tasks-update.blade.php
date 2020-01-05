@@ -22,8 +22,22 @@
                         <form role="form ">
                             @method('PUT')
                             <div class="row">
-                                <div class="col-md-4">
-                                    <!-- text input -->
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Employee</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="optEmployee">
+                                            <option selected="selected" disabled="disabled" value="null"></option>
+                                            @foreach($aEmpData as $aEData)
+                                                @if($aEData->active === 'active')
+                                                    <option selected value="{{ $aEData->emp_id }}">[{{ $aEData->emp_number }}] - {{ $aEData->last_name }}, {{ $aEData->first_name }} {{ $aEData->middle_name }}</option>
+                                                @else
+                                                    <option value="{{ $aEData->emp_id }}">[{{ $aEData->emp_number }}] - {{ $aEData->last_name }}, {{ $aEData->first_name }} {{ $aEData->middle_name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Build</label>
                                         <select class="form-control select2bs4" style="width: 100%;" id="optBuild">
@@ -38,44 +52,42 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <!-- text input -->
                                     <div class="form-group">
                                         <label>Task ID</label>
                                         <input value="{{ $aTaskData->task_id }}" disabled type="text" class="form-control" placeholder="e.g (RID-000001)" id="txtTaskId">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Incident Type</label>
-                                        <select class="form-control select2bs4" id="optIncidentType">
-{{--                                            @if(isNull($aIncType))--}}
-
-{{--                                            @else--}}
-                                                @foreach($aIncType as $aIncData)
-                                                    @if($aIncData['active'] === 'active')
-                                                        <option value="{{ $aIncData['types'] }}" selected>{{ ucfirst($aIncData['types']) }}</option>
-                                                    @else
-                                                        <option value="{{ $aIncData['types'] }}">{{ ucfirst($aIncData['types']) }}</option>
-                                                    @endif
-                                                @endforeach
-{{--                                            @endif--}}
-
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Severity</label>
-                                        <select class="form-control select2bs4" id="optSeverity">
-                                            <option value="low">Low</option>
-                                            <option value="medium">Medium</option>
-                                            <option value="high">High</option>
+                                        <label>Incident Type</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="optIncidentType">
+                                            @foreach($aIncType as $aIncData)
+                                                @if($aIncData['active'] === 'active')
+                                                    <option value="{{ $aIncData['types'] }}" selected>{{ ucfirst($aIncData['types']) }}</option>
+                                                @else
+                                                    <option value="{{ $aIncData['types'] }}">{{ ucfirst($aIncData['types']) }}</option>
+                                                @endif
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Severity</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="optSeverity">
+                                            @foreach($aSeverity as $aSevData)
+                                                @if($aSevData['active'] === 'active')
+                                                    <option value="{{ $aSevData['type'] }}" selected>{{ ucfirst($aSevData['type']) }}</option>
+                                                @else
+                                                    <option value="{{ $aSevData['type'] }}">{{ ucfirst($aSevData['type']) }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Date Started</label>
                                         <div class="input-group">
@@ -86,7 +98,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Date Completed</label>
                                         <div class="input-group">

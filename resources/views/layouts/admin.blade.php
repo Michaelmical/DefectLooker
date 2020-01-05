@@ -52,16 +52,16 @@
 
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item has-treeview menu-open">
-                        <a href="{{route('dashboard')}}" class="nav-link active">
+                    <li class="nav-item has-treeview">
+                        <a href="{{route('dashboard')}}" class="nav-link {{ (Route::is('dashboard')) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item has-treeview {{ (Route::is('build')) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>
                                 Setup
@@ -70,7 +70,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{  route('build') }}" class="nav-link">
+                                <a href="{{  route('build') }}" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}">
                                     <i class="fas fa-check-circle nav-icon"></i>
                                     <p>Build</p>
                                 </a>
@@ -85,8 +85,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item has-treeview {{ (Route::is(['tasks', 'tasks-create'])) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ (Route::is(['tasks', 'tasks-create'])) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
                                 Task
@@ -95,13 +95,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{  route('tasks') }}" class="nav-link">
+                                <a href="{{  route('tasks') }}" class="nav-link {{ (Route::is('tasks')) ? 'active' : '' }}">
                                     <i class="fas fa-book nav-icon"></i>
                                     <p>List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{  route('tasks-create') }}" class="nav-link">
+                                <a href="{{  route('tasks-create') }}" class="nav-link {{ (Route::is('tasks-create')) ? 'active' : '' }}">
                                     <i class="far fa-plus-square nav-icon"></i>
                                     <p>Create</p>
                                 </a>

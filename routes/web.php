@@ -19,10 +19,12 @@ Route::post('post-registration', 'AuthController@postRegistration');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/logout', 'AuthController@logout');
 
-Route::get('/tasks', 'TaskController@index')->name('tasks');
-Route::get('/tasks/create', 'TaskController@create')->name('tasks-create');
-Route::post('/tasks/store', 'TaskController@store')->name('tasks-store');
-Route::get('/points', 'PointsController@index')->name('points');
+Route::get('/tasks',               'TaskController@index')->name('tasks');
+Route::get('/tasks/create',        'TaskController@create')->name('tasks-create');
+Route::post('/tasks',              'TaskController@store')->name('tasks-store');
+Route::get('/tasks/{taskid}/edit', 'TaskController@edit')->name('tasks-edit'); // view & data retrieve
+Route::put('/tasks/{taskid}',      'TaskController@update')->name('tasks-update'); // func
+Route::delete('/tasks/{taskid}',   'TaskController@destroy')->name('tasks->delete');
 
 Route::get('employee', 'EmployeeController@index')->name('employee');
 Route::post('employee', 'EmployeeController@store')->name('employee.store');

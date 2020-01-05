@@ -21,8 +21,18 @@
                     <div class="card-body">
                         <form role="form">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <!-- text input -->
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Employee</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="optEmployee">
+                                            <option selected="selected" disabled="disabled" value="null"></option>
+                                            @foreach($aEmpData as $aEData)
+                                                <option value="{{ $aEData->emp_id }}">[{{ $aEData->emp_number }}] - {{ $aEData->last_name }}, {{ $aEData->first_name }} {{ $aEData->middle_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Build</label>
                                         <select class="form-control select2bs4" style="width: 100%;" id="optBuild">
@@ -33,17 +43,18 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <!-- text input -->
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Task ID</label>
                                         <input type="text" class="form-control" placeholder="e.g (RID-000001)" id="txtTaskId">
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Incident Type</label>
-                                        <select class="form-control select2bs4" id="optIncidentType">
+                                        <select class="form-control select2bs4" style="width: 100%;" id="optIncidentType">
                                             <option value="null" selected disabled></option>
                                             <option value="bug">Bug</option>
                                             <option value="task">Task</option>
@@ -51,12 +62,10 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Severity</label>
-                                        <select class="form-control select2bs4" id="optSeverity">
+                                        <select class="form-control select2bs4" style="width: 100%;" id="optSeverity">
                                             <option value="null" selected disabled></option>
                                             <option value="low">Low</option>
                                             <option value="medium">Medium</option>
@@ -64,7 +73,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Date Started</label>
                                         <div class="input-group">
@@ -75,7 +84,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Date Completed</label>
                                         <div class="input-group">

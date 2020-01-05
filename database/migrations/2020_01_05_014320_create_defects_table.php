@@ -15,7 +15,7 @@ class CreateDefectsTable extends Migration
     {
         Schema::create('defects', function (Blueprint $table) {
             $table->bigIncrements('defects_id');
-            $table->integer('orig_ref_id'); // task table child
+            $table->string('orig_ref_id'); // task table child
             $table->string('task_id'); // task table child
             $table->integer('defect_type_id');
             $table->integer('defect_cause_id');
