@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/login', 'AuthController@index');
+Route::get('/login', 'AuthController@index')->name('login');
 Route::get('/sessionhere', 'AuthController@sessionhere');
 Route::post('/postLogin', 'AuthController@postLogin')->name('login.postLogin');
 Route::get('/registration', 'AuthController@registration');
@@ -21,6 +21,7 @@ Route::get('/logout', 'AuthController@logout');
 
 Route::get('/tasks', 'TaskController@index')->name('tasks');
 Route::get('/tasks/create', 'TaskController@create')->name('tasks-create');
+Route::post('/tasks/store', 'TaskController@store')->name('tasks-store');
 Route::get('/points', 'PointsController@index')->name('points');
 
 Route::get('employee', 'EmployeeController@index')->name('employee');

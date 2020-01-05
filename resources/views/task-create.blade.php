@@ -1,5 +1,9 @@
 @extends('layouts.admin');
 
+@push('meta')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endpush
+
 @push('ui')
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
@@ -20,11 +24,11 @@
                                 <div class="col-md-4">
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Project</label>
-                                        <select class="form-control select2bs4" style="width: 100%;">
+                                        <label>Build</label>
+                                        <select class="form-control select2bs4" style="width: 100%;" id="optBuild">
                                             <option selected="selected" disabled="disabled" value="null"></option>
-                                            @foreach($aProjectData as $aData)
-                                                <option value="{{ $aData->proj_id }}">{{ $aData->proj_name }}</option>
+                                            @foreach($aBuildData as $aData)
+                                                <option value="{{ $aData->build_id }}">{{ $aData->descr }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -32,18 +36,18 @@
                                 <div class="col-md-4">
                                     <!-- text input -->
                                     <div class="form-group">
-                                        <label>Reference ID</label>
-                                        <input type="text" class="form-control" placeholder="e.g (RID-000001)">
+                                        <label>Task ID</label>
+                                        <input type="text" class="form-control" placeholder="e.g (RID-000001)" id="txtTaskId">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Incident Type</label>
-                                        <select class="form-control select2bs4">
+                                        <select class="form-control select2bs4" id="optIncidentType">
                                             <option value="null" selected disabled></option>
-                                            <option value="Bug">Bug</option>
-                                            <option value="Task">Task</option>
-                                            <option value="Enhancement">Enhancement</option>
+                                            <option value="bug">Bug</option>
+                                            <option value="task">Task</option>
+                                            <option value="enhancement">Enhancement</option>
                                         </select>
                                     </div>
                                 </div>
@@ -52,11 +56,11 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Severity</label>
-                                        <select class="form-control select2bs4">
+                                        <select class="form-control select2bs4" id="optSeverity">
                                             <option value="null" selected disabled></option>
-                                            <option value="Low">Low</option>
-                                            <option value="Medium">Medium</option>
-                                            <option value="High">High</option>
+                                            <option value="low">Low</option>
+                                            <option value="medium">Medium</option>
+                                            <option value="high">High</option>
                                         </select>
                                     </div>
                                 </div>
@@ -67,7 +71,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            <input type="text" id="dtStarted" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                         </div>
                                     </div>
                                 </div>
@@ -78,9 +82,22 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                             </div>
-                                            <input type="text" class="form-control date-completed" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                            <input type="text" id="dtCompleted" class="form-control date-completed" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Task Description</label>
+                                        <textarea class="form-control" rows="4" id="txtdesc"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-block btn-primary" id="btn-task-create">Create</button>
                                 </div>
                             </div>
                         </form>
@@ -92,10 +109,11 @@
 @endsection
 
 @push('addons')
-    <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
-    <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
-    <script src="{{asset('plugins/moment/moment.min.js')}}"></script>
-    <script src="{{asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
+    <script src="{{ asset('customjs/task-store.js') }}"></script>
 
     <script>
         $('.select2').select2();

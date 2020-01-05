@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Task;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -30,8 +32,11 @@ class AuthController extends Controller
         $sEmail = $request->get('email');
         $sPassword = $request->get('password');
 
-        $aUserData = User::where(['email' => $sEmail, 'password' => md5($sPassword)])->first(); // Id ng user userstable
+        $aUserData = User::where(['email' => $sEmail, 'password' => md5($sPassword)])->first();
 
+        if (empty($aUserData) === true) {
+            return redirect()->route('login');
+        }
 
         $aEmpData = Employee::where('emp_id', $aUserData['id'])->first();
 //        $sFullname = $aEmpData['last_name'] . ', ' . $aEmpData['first_name'] . ' ' . $aEmpData['middle_name'];
@@ -54,7 +59,8 @@ class AuthController extends Controller
 
     public function sessionhere()
     {
-        return session()->all();
+//        return session()->all();
+        return  response()->json(DB::table('task')->get());
     }
 
 //    public function postRegistration(Request $request)

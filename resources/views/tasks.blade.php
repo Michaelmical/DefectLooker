@@ -16,29 +16,37 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
+                                    <th>Build</th>
+                                    <th>Task</th>
+                                    <th>Incident Type</th>
+                                    <th>Severity</th>
+                                    <th width="120px">Date Started</th>
+                                    <th width="120px">Date Completed</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Other browsers</td>
-                                    <td>All others</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>U</td>
+                            @foreach($aTaskData as $aData)
+                                <tr data-id="{{ $aData->task_id }}">
+                                    <td>{{ $aData->descr }}</td>
+                                    <td>{{ $aData->task_id }}</td>
+                                    <td>{{ ucfirst($aData->inc_type) }}</td>
+                                    <td>{{ ucfirst($aData->severity) }}</td>
+                                    <td>{{ ucfirst($aData->started_at) }}</td>
+                                    <td>{{ ucfirst($aData->completed_at) }}</td>
+                                    <td></td>
                                 </tr>
+                            @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
+                                    <th>Build</th>
+                                    <th>Task</th>
+                                    <th>Incident Type</th>
+                                    <th>Severity</th>
+                                    <th>Date Started</th>
+                                    <th>Date Completed</th>
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                         </table>

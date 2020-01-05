@@ -15,6 +15,7 @@ class CreateTaskTable extends Migration
     {
         Schema::create('task', function (Blueprint $table) {
             $table->string('task_id', 8)->primary();
+            $table->text('name');
             $table->enum('inc_type', ['bug','task','enhancement']);
             $table->enum('severity', ['low','medium','high']);
             $table->date('started_at');

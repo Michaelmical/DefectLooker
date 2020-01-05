@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Project;
+use App\Build;
 use App\Task;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class TaskController extends Controller
@@ -20,7 +21,7 @@ class TaskController extends Controller
 //        $userId = session('empid');
 //        $userData = Task::find($userId)->first();
 //        $empData = Employee::find($userData['emp_id'])->first();
-        return view('tasks');
+        return view('tasks', ['aTaskData' => DB::table('task')->join('build','task.build_id','=', 'build.build_id')->get()]);
     }
 
     /**
@@ -30,19 +31,48 @@ class TaskController extends Controller
      */
     public function create()
     {
-        ;
-        return view('task-create', ['aProjectData' => Project::all()]);
+        return view('task-create', ['aBuildData' => Build::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'iBuildId'       => 'required',
+            'sTaskId'         => 'required',
+            'sIncType'       => 'required',
+            'sSeverity'      => 'required',
+            'sStartDate'     => 'required',
+            'sCompletedDate' => 'required',
+            'sDesc'          => 'required'
+        ]);
+
+        $aData = Task::create([
+            'task_id'      => $request->get('sTaskId'),
+            'name'         => $request->get('sDesc'),
+            'inc_type'     => $request->get('sIncType'),
+            'severity'     => $request->get('sSeverity'),
+            'started_at'   => $request->get('sStartDate'),
+            'completed_at' => $request->get('sCompletedDate'),
+            'emp_id'       => (int)session()->get('empid'),
+            'build_id'     => (int)$request->get('iBuildId')
+        ]);
+
+        return empty($aData) === true ?
+            response()->json([
+            'result'  => false,
+            'message' => 'Failed'
+            ])
+            :
+            response()->json([
+            'result' => true,
+            'data'   => $aData
+            ]);
     }
 
     /**
