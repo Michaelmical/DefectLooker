@@ -21,7 +21,7 @@ class CreateTaskTable extends Migration
             $table->date('started_at');
             $table->date('completed_at');
             $table->integer('emp_id');
-            $table->integer('proj_id');
+            $table->integer('build_id');
             $table->timestamps();
         });
     }
