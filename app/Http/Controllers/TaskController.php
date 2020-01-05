@@ -19,9 +19,6 @@ class TaskController extends Controller
      */
     public function index()
     {
-//        $userId = session('empid');
-//        $userData = Task::find($userId)->first();
-//        $empData = Employee::find($userData['emp_id'])->first();
         return view('tasks', ['aTaskData' => DB::table('task')
             ->join('build','task.build_id','=', 'build.build_id')
             ->join('employee', 'task.emp_id', '=', 'employee.emp_id')->get()]);

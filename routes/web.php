@@ -41,8 +41,11 @@ Route::get('project', 'ProjectController@index')->name('project');
 Route::get('project/create', 'ProjectController@create')->name('project-create');
 Route::post('project', 'ProjectController@store')->name('project.store');
 
-Route::get('functionpoints', 'FunctionPointsController@index')->name('functionpoints');
+Route::get('functionpoints',        'FunctionPointsController@index')->name('functionpoints');
 Route::get('functionpoints/create', 'FunctionPointsController@create')->name('functionpoints-create');
+Route::post('functionpoints',       'FunctionPointsController@store')->name('functionpoints-store');
+
+Route::get('areatype/{id}',      'AreaTypeController@show')->name('areatype-show');
 
 //Route::get('/resourceName',                 'ControllerName@index');
 //Route::get('/resourceName/{resource}',      'ControllerName@show');

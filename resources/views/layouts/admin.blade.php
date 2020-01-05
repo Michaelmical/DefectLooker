@@ -123,8 +123,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item has-treeview {{ (Route::is(['functionpoints', 'functionpoints-create'])) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ (Route::is(['functionpoints', 'functionpoints-create'])) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-table"></i>
                             <p>
                                 Function Points
@@ -133,13 +133,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{  route('employee') }}" class="nav-link">
+                                <a href="{{  route('functionpoints') }}" class="nav-link {{ (Route::is('functionpoints')) ? 'active' : '' }}">
                                     <i class="fas fa-book nav-icon"></i>
                                     <p>List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{  route('employee-create') }}" class="nav-link">
+                                <a href="{{  route('functionpoints-create') }}" class="nav-link {{ (Route::is('functionpoints-create')) ? 'active' : '' }}">
                                     <i class="far fa-plus-square nav-icon"></i>
                                     <p>Create</p>
                                 </a>

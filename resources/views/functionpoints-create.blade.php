@@ -18,7 +18,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Build Details</h3>
+                            <h3 class="card-title">Function Point Details</h3>
                         </div>
                         <!-- /.card-header -->
 
@@ -32,73 +32,71 @@
                                 </ul>
                             </div>
                         @endif
-                        <!-- form start -->
-                        <form id="buildadd" method="POST" action="{{route('build.store')}}">
+                        <form id="buildadd" method="POST" action="{{ route('functionpoints-store') }}">
                             @csrf
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row mb-n3">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Task</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="inputProject">
-                                                <option selected="selected" disabled="disabled" value="null"></option>
+                                            <select class="form-control select2bs4" required style="width: 100%;" name="inputProject" id="optTask">
+                                                <option></option>
                                                 @foreach($tasks as $task)
-                                                    <option value="{{ $task->task_id }}">{{ $task->name }}</option>
+                                                    <option value="{{ $task->task_id }}">{{ $task->task_id }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Area</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="inputArea">
-                                                <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($areas as $area)
-                                                    <option value="{{ $area->area_id }}">{{ $area->descr }}</option>
-                                                @endforeach
-                                            </select>
+                                <div id="itemshere">
+                                    <div class="row mb-n3" id="template">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Area</label>
+                                                <select class="form-control btnArea" required style="width: 100%;" name="inputArea[]">
+                                                    <option></option>
+                                                    @foreach($areas as $area)
+                                                        <option value="{{ $area->area_id }}">{{ ucfirst($area->descr) }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Area Type</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="inputAreaType">
-                                                <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($areatypes as $areatype)
-                                                    <option value="{{ $areatype->areatype_id }}">{{ $areatype->descr }}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Area Type</label>
+                                                <select class="form-control btnAreaType" disabled required style="width: 100%;" name="inputAreaType[]">
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label>Complexity</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="inputComplex">
-                                                <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($complexities as $complex)
-                                                    <option value="{{ $complex->complex_id }}">{{ $complex->descr }}</option>
-                                                @endforeach
-                                            </select>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Complexity</label>
+                                                <select class="form-control" disabled required style="width: 100%;" name="inputComplex[]">
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="inputDescr">Associated Item</label>
-                                            <input type="text" class="form-control" name="inputAssoItem" placeholder="Enter Description..">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label for="inputDescr">Associated Item</label>
+                                                <input type="text" class="form-control" name="inputAssoItem[]" required placeholder="Enter Description..">
+                                            </div>
                                         </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-success btnAdd">Add</button>
+                                                <button type="button" class="btn btn-danger btnRemove">Remove</button>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <hr>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary" id="btn-submit">Add Build</button>
+                                <hr>
+                                <button type="submit" class="btn btn-primary" id="btn-submit">Add Points</button>
                             </div>
                         </form>
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
         </div>
@@ -107,11 +105,6 @@
 
 @push('addons')
     <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            bsCustomFileInput.init();
-        });
-    </script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
     <script src="{{asset('plugins/moment/moment.min.js')}}"></script>
@@ -121,12 +114,57 @@
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
-        //Datemask yyyy/mm/dd
-        $('#datemask').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
-        //Datemask2 yyyy/mm/dd
-        $('#datemask2').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
-        //Money Euro
-        $('[data-mask]').inputmask()
+        $('body').on('click', '.btnRemove', function () {
+            var iExistPts = $('div[id="template"]').length;
+            if(iExistPts === 1) {
+                return false;
+            }
+            $(this).parent().parent().parent().remove();
+        });
+        $('body').on('click', '.btnAdd', function () {
+            var asd = $('#template').clone();
+            asd.find('input[name="inputAssoItem[]"]').val('')
+            $('#itemshere').prepend(asd);
+        });
+        $('body').on('change', '.btnArea', function () {
+            // alert($(this).val());
+            var oThis = $(this);
+            oThis.parent().parent().next().find('select').removeAttr('disabled');
+
+            $.ajax({
+                url : '/areatype/' + oThis.val(),
+                method : 'GET',
+                success : function (data) {
+                    oThis.parent().parent().next().find('select').empty();
+                    oThis.parent().parent().next().find('select').append(
+                        '<option></option>'
+                    );
+                    $.each(data, function (index, value) {
+                        oThis.parent().parent().next().find('select').append(
+                            '<option value="'+ value.areatype_id +'">'+value.descr+'</option>'
+                        );
+                    });
+                }
+            })
+        });
+        $('body').on('change', '.btnAreaType', function () {
+            alert($(this).val());
+            // var oThis = $(this);
+            // oThis.parent().parent().next().find('select').removeAttr('disabled');
+            //
+            // $.ajax({
+            //     url : '/complexity/' + oThis.val(),
+            //     method : 'GET',
+            //     success : function (data) {
+            //         oThis.parent().parent().next().find('select').empty();
+            //         $.each(data, function (index, value) {
+            //             oThis.parent().parent().next().find('select').append(
+            //                 '<option value="'+ value.areatype_id +'">'+value.descr+'</option>'
+            //             );
+            //         });
+            //     }
+            // });
+        });
     </script>
 @endpush
 

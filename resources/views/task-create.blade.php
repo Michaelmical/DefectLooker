@@ -14,9 +14,9 @@
     <section class="content">
         <div class="row">
             <div class="col-12">
-                <div class="card card-primary card-outline">
+                <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Create Task</h3>
+                        <h3 class="card-title">Task Details</h3>
                     </div>
                     <div class="card-body">
                         <form role="form">

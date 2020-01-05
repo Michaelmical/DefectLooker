@@ -38,41 +38,48 @@
             <div class="col-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">BUILDS</h3>
+                        <h3 class="card-title">FUNCTION POINTS</h3>
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
-                            <tr>
-                                <th>Task No</th>
-                                <th>Task Name</th>
-                                <th>Total Points</th>
-                                <th>Allowable Defects</th>
-                            </tr>
+                                <tr>
+                                    <th width="100px;">Task No</th>
+                                    <th>Task Name</th>
+                                    <th width="100px;">Total Points</th>
+                                    <th width="150px;">Allowable Defects</th>
+                                    <th width="50px;">Action</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            @foreach($tasks as $task)
-                                <tr>
-                                    <td>{{$task->task_id}}</td>
-                                    <td>{{$task->name}}</td>
-                                    <td>{{$task->points}}</td>
-                                    <td>{{$task->allowable}}</td>
-                                </tr>
-                            @endforeach
+                                @foreach($tasks as $task)
+                                    <tr>
+                                        <td>{{$task->task_id}}</td>
+                                        <td>{{$task->name}}</td>
+                                        <td>{{$task->points}}</td>
+                                        <td>{{$task->allowable}}</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
-                            <tr>
-                                <th>Task No</th>
-                                <th>Task Name</th>
-                                <th>Total Points</th>
-                                <th>Allowable Defects</th>
-                            </tr>
+                                <tr>
+                                    <th>Task No</th>
+                                    <th>Task Name</th>
+                                    <th>Total Points</th>
+                                    <th>Allowable Defects</th>
+                                    <th>Action</th>
+                                </tr>
                             </tfoot>
                         </table>
                     </div>
                     <div class="card-footer">
                         <a class="btn btn-success" href="{{route('functionpoints-create')}}">
-                            <i class="fas fa-plus-square"></i> Add Points
+                            <i class="fas fa-plus-square"></i>&nbsp; Add Points
                         </a>
                     </div>
                 </div>

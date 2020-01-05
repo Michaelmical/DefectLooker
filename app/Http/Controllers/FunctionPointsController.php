@@ -17,6 +17,7 @@ class FunctionPointsController extends Controller
             ->join('complex', 'itemcriteria.complex_id', '=', 'complex.complex_id')
             ->groupBy('task.task_id')->selectRaw('task.task_id, task.name, SUM(complex.weight) AS points, SUM(complex.weight) * .1 as allowable ')
             ->get();
+//        return $query;
         return view('functionpoints',
             ['tasks' => $query]);
     }
@@ -35,5 +36,10 @@ class FunctionPointsController extends Controller
                 'areatypes' => $areatypeData,
                 'complexities' => $complex
             ]);
+    }
+
+    public function store(Request $request)
+    {
+        return $request->all();
     }
 }
