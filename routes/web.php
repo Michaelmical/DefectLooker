@@ -28,4 +28,6 @@ Route::get('employee', 'EmployeeController@index')->name('employee');
 Route::post('employee', 'EmployeeController@store')->name('employee.store');
 Route::get('employee/create', 'EmployeeController@create')->name('employee-create');
 
-
+Route::get('build', 'BuildController@index')->name('build');
+Route::get('build/create', 'BuildController@create')->name('build-create');
+Route::post('build', 'BuildController@store')->name('build.store');

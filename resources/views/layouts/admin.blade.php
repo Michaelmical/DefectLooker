@@ -34,8 +34,8 @@
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="#" class="brand-link">
-            <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="Defect LOOKER Logo" class="brand-image img-circle elevation-3"
-                 style="opacity: .8">
+{{--            <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="Defect LOOKER Logo" class="brand-image img-circle elevation-3"--}}
+{{--                 style="opacity: .8">--}}
             <span class="brand-text font-weight-light">Defect LOOKER</span>
         </a>
 
@@ -62,6 +62,23 @@
                     </li>
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>
+                                Setup
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{  route('build') }}" class="nav-link">
+                                    <i class="fas fa-band-aid nav-icon"></i>
+                                    <p>Build</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
                                 Task
@@ -71,13 +88,13 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{  route('tasks') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-book nav-icon"></i>
                                     <p>List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{  route('tasks-create') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="far fa-plus-square nav-icon"></i>
                                     <p>Create</p>
                                 </a>
                             </li>
@@ -94,13 +111,13 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{  route('employee') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fas fa-book nav-icon"></i>
                                     <p>List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{  route('employee-create') }}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="far fa-plus-square nav-icon"></i>
                                     <p>Create</p>
                                 </a>
                             </li>
@@ -116,9 +133,15 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/tables/simple.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Create Points</p>
+                                <a href="{{  route('employee') }}" class="nav-link">
+                                    <i class="fas fa-book nav-icon"></i>
+                                    <p>List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{  route('employee-create') }}" class="nav-link">
+                                    <i class="far fa-plus-square nav-icon"></i>
+                                    <p>Create</p>
                                 </a>
                             </li>
                         </ul>

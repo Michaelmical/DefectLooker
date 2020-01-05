@@ -18,7 +18,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Employee Details</h3>
+                            <h3 class="card-title">Build Details</h3>
                         </div>
                         <!-- /.card-header -->
 {{--                        @if ($message = Session::get('success'))--}}

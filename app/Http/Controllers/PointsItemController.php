@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Employee;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class PointsItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class EmployeeController extends Controller
     public function index()
     {
         //
-        $empData = employee::all();
-        return view('employee', ['employees' => $empData]);
+        return view('pointsitem');
     }
 
     /**
@@ -27,7 +25,6 @@ class EmployeeController extends Controller
     public function create()
     {
         //
-        return view('employee-create');
     }
 
     /**
@@ -39,31 +36,15 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         //
-
-       return response()->json($request);
-
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-
-        $imageName = time().'.'.$request->image->extension();
-
-        $request->image->move(public_path('images'), $imageName);
-
-        return back()
-
-            ->with('success','You have successfully upload image.')
-
-            ->with('image',$imageName);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
+    public function show($id)
     {
         //
     }
@@ -71,10 +52,10 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit($id)
     {
         //
     }
@@ -83,10 +64,10 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -94,10 +75,10 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employee  $employee
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy($id)
     {
         //
     }
