@@ -33,7 +33,8 @@
                             </div>
                         @endif
                         <!-- form start -->
-                        <form id="buildadd" method="POST" action="{{route('build.store')}}">
+                        <form id="buildupdate" method="POST" action="{{route('build.update',['id'=>$build->build_id])}}">
+                            @method('PUT')
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -43,7 +44,11 @@
                                             <select class="form-control select2bs4" style="width: 100%;" name="inputProject">
                                                 <option selected="selected" disabled="disabled" value="null"></option>
                                                 @foreach($projects as $project)
-                                                    <option value="{{ $project->proj_id }}">{{ $project->proj_name }}</option>
+                                                    @if($project->proj_id==$build->proj_id)
+                                                        <option value="{{ $project->proj_id }}" selected="selected">{{ $project->proj_name }}</option>
+                                                    @else
+                                                        <option value="{{ $project->proj_id }}" >{{ $project->proj_name }}</option>
+                                                    @endif
                                                 @endforeach
                                             </select>
                                         </div>
@@ -51,19 +56,19 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputSP">Service Pack</label>
-                                            <input type="text" class="form-control" name="inputSP" placeholder="Enter SP..">
+                                            <input type="text" class="form-control" name="inputSP" placeholder="Enter SP.." value="{{$build->sp_id}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputVS">Version</label>
-                                            <input type="text" class="form-control" name="inputVS" placeholder="Enter Version..">
+                                            <input type="text" class="form-control" name="inputVS" placeholder="Enter Version.." value="{{$build->version_id}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputDrop">Drop</label>
-                                            <input type="text" class="form-control" name="inputDrop" placeholder="Enter Drop..">
+                                            <input type="text" class="form-control" name="inputDrop" placeholder="Enter Drop.." value="{{$build->drop_id}}">
                                         </div>
                                     </div>
                                 </div>
@@ -71,14 +76,14 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputDescr">Description</label>
-                                            <input type="text" class="form-control" name="inputDescr" placeholder="Enter Description..">
+                                            <input type="text" class="form-control" name="inputDescr" placeholder="Enter Description.." value="{{$build->descr}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary" id="btn-submit">Add Build</button>
+                                <button type="submit" class="btn btn-primary" id="btn-submit">Update Build</button>
                             </div>
                         </form>
                     </div>
@@ -95,6 +100,28 @@
         $(document).ready(function () {
             bsCustomFileInput.init();
         });
+        {{--$.ajaxSetup({--}}
+        {{--    headers: {--}}
+        {{--        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+        {{--    }--}}
+        {{--});--}}
+        {{--$('#btn-submit').click(function (e) {--}}
+        {{--    e.preventDefault();--}}
+        {{--    $(this).html('Adding..');--}}
+        {{--    $.ajax({--}}
+        {{--        data: $('#buildadd').serialize(),--}}
+        {{--        url: "{{ route('build.store') }}",--}}
+        {{--        type: "POST",--}}
+        {{--        dataType: 'json',--}}
+        {{--        success: function (data) {--}}
+        {{--            console.log(data);--}}
+        {{--        },--}}
+        {{--        error: function (data) {--}}
+        {{--            console.log('Error:', data);--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--});--}}
+
     </script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>

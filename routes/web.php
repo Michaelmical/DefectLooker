@@ -19,12 +19,9 @@ Route::post('post-registration', 'AuthController@postRegistration');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::get('/logout', 'AuthController@logout');
 
-Route::get('/tasks',               'TaskController@index')->name('tasks'); // view of list
-Route::get('/tasks/create',        'TaskController@create')->name('tasks-create'); // view
-Route::post('/tasks',              'TaskController@store')->name('tasks-store'); // func
-Route::get('/tasks/{taskid}/edit', 'TaskController@edit')->name('tasks-edit'); // view & data retrieve
-Route::put('/tasks/{taskid}',      'TaskController@update'); // func
-
+Route::get('/tasks', 'TaskController@index')->name('tasks');
+Route::get('/tasks/create', 'TaskController@create')->name('tasks-create');
+Route::post('/tasks/store', 'TaskController@store')->name('tasks-store');
 Route::get('/points', 'PointsController@index')->name('points');
 
 Route::get('employee', 'EmployeeController@index')->name('employee');
@@ -33,8 +30,14 @@ Route::get('employee/create', 'EmployeeController@create')->name('employee-creat
 
 Route::get('build', 'BuildController@index')->name('build');
 Route::get('build/create', 'BuildController@create')->name('build-create');
+Route::get('build/{id}/edit', 'BuildController@edit')->name('build.edit');
 Route::post('build', 'BuildController@store')->name('build.store');
+Route::put('build/{id}',      'BuildController@update')->name('build.update');
+Route::delete('build/{id}',   'BuildController@destroy')->name('build.delete');
 
+Route::get('project', 'ProjectController@index')->name('project');
+Route::get('project/create', 'ProjectController@create')->name('project-create');
+Route::post('project', 'ProjectController@store')->name('project.store');
 
 //Route::get('/resourceName',                 'ControllerName@index');
 //Route::get('/resourceName/{resource}',      'ControllerName@show');

@@ -34,8 +34,8 @@
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="#" class="brand-link">
-{{--            <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="Defect LOOKER Logo" class="brand-image img-circle elevation-3"--}}
-{{--                 style="opacity: .8">--}}
+            <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="Defect LOOKER Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
             <span class="brand-text font-weight-light">Defect LOOKER</span>
         </a>
 
@@ -52,16 +52,16 @@
 
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item has-treeview">
-                        <a href="{{route('dashboard')}}" class="nav-link {{ (Route::is('dashboard')) ? 'active' : '' }}">
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="{{route('dashboard')}}" class="nav-link active">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview {{ (Route::is('build')) ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}">
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>
                                 Setup
@@ -69,17 +69,24 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item active">
-                                <a href="{{  route('build') }}" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}">
-                                    <i class="fas fa-band-aid nav-icon"></i>
+                            <li class="nav-item">
+                                <a href="{{  route('build') }}" class="nav-link">
+                                    <i class="fas fa-check-circle nav-icon"></i>
                                     <p>Build</p>
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{  route('project') }}" class="nav-link">
+                                    <i class="fas fa-check-circle nav-icon"></i>
+                                    <p>Project</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-
-                    <li class="nav-item has-treeview {{ (Route::is(['tasks', 'tasks-create'])) ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ (Route::is(['tasks', 'tasks-create'])) ? 'active' : '' }}">
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-edit"></i>
                             <p>
                                 Task
@@ -88,13 +95,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{  route('tasks') }}" class="nav-link {{ (Route::is('tasks')) ? 'active' : '' }}">
+                                <a href="{{  route('tasks') }}" class="nav-link">
                                     <i class="fas fa-book nav-icon"></i>
                                     <p>List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{  route('tasks-create') }}" class="nav-link {{ (Route::is('tasks-create')) ? 'active' : '' }}">
+                                <a href="{{  route('tasks-create') }}" class="nav-link">
                                     <i class="far fa-plus-square nav-icon"></i>
                                     <p>Create</p>
                                 </a>
