@@ -138,7 +138,9 @@ class BuildController extends Controller
         $data = Build::findorfail($id);
         $data->delete();
 
-        //return response()->json($id);
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
 
     }
 }

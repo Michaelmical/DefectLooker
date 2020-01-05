@@ -23,7 +23,7 @@
                         <p>Are you sure you want to delete this record?</p>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal" id="btnCloseModal">Cancel</button>
                         @csrf
                         @method('DELETE')
                         <button type="button" class="btn btn-outline-light" id="deleteRecord">Delete</button>
@@ -119,7 +119,10 @@
                     $('#deleteRecord').text('Deleting...');
                 },
                 success: function (data) {
-                    // table.draw();
+                    if(data.success){
+                        $('#btnCloseModal').click();
+                        location.reload();
+                    }
                 },
                 error: function (data) {
                     // console.log('Error:', data);

@@ -44,39 +44,35 @@
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Build Description</th>
-                                <th>Actions</th>
+                                <th>Task No</th>
+                                <th>Task Name</th>
+                                <th>Total Points</th>
+                                <th>Allowable Defects</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($builds as $build)
+                            @foreach($tasks as $task)
                                 <tr>
-                                    <td>{{$build->proj_name}}</td>
-                                    <td>{{$build->descr}}</td>
-                                    <td>
-                                        <a class="btn btn-warning" href="{{route('build.edit',['id'=>$build->build_id])}}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger deleteBuild" data-toggle="modal" data-target="#modal-danger" id="{{$build->build_id}}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
+                                    <td>{{$task->task_id}}</td>
+                                    <td>{{$task->name}}</td>
+                                    <td>{{$task->points}}</td>
+                                    <td>{{$task->allowable}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Build Description</th>
-                                <th>Actions</th>
+                                <th>Task No</th>
+                                <th>Task Name</th>
+                                <th>Total Points</th>
+                                <th>Allowable Defects</th>
                             </tr>
                             </tfoot>
                         </table>
                     </div>
                     <div class="card-footer">
-                        <a class="btn btn-success" href="{{route('build-create')}}">
-                            <i class="fas fa-plus-square"></i> Add Build
+                        <a class="btn btn-success" href="{{route('functionpoints-create')}}">
+                            <i class="fas fa-plus-square"></i> Add Points
                         </a>
                     </div>
                 </div>

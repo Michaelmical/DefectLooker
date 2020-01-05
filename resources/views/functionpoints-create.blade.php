@@ -39,39 +39,55 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label>Projects</label>
+                                            <label>Task</label>
                                             <select class="form-control select2bs4" style="width: 100%;" name="inputProject">
                                                 <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($projects as $project)
-                                                    <option value="{{ $project->proj_id }}">{{ $project->proj_name }}</option>
+                                                @foreach($tasks as $task)
+                                                    <option value="{{ $task->task_id }}">{{ $task->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label for="inputSP">Service Pack</label>
-                                            <input type="text" class="form-control" name="inputSP" placeholder="Enter SP..">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label for="inputVS">Version</label>
-                                            <input type="text" class="form-control" name="inputVS" placeholder="Enter Version..">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <label for="inputDrop">Drop</label>
-                                            <input type="text" class="form-control" name="inputDrop" placeholder="Enter Drop..">
-                                        </div>
-                                    </div>
                                 </div>
+                                <hr>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label for="inputDescr">Description</label>
-                                            <input type="text" class="form-control" name="inputDescr" placeholder="Enter Description..">
+                                            <label>Area</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" name="inputArea">
+                                                <option selected="selected" disabled="disabled" value="null"></option>
+                                                @foreach($areas as $area)
+                                                    <option value="{{ $area->area_id }}">{{ $area->descr }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Area Type</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" name="inputAreaType">
+                                                <option selected="selected" disabled="disabled" value="null"></option>
+                                                @foreach($areatypes as $areatype)
+                                                    <option value="{{ $areatype->areatype_id }}">{{ $areatype->descr }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label>Complexity</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" name="inputComplex">
+                                                <option selected="selected" disabled="disabled" value="null"></option>
+                                                @foreach($complexities as $complex)
+                                                    <option value="{{ $complex->complex_id }}">{{ $complex->descr }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <label for="inputDescr">Associated Item</label>
+                                            <input type="text" class="form-control" name="inputAssoItem" placeholder="Enter Description..">
                                         </div>
                                     </div>
                                 </div>
