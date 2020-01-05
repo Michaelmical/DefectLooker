@@ -100,8 +100,8 @@ CREATE TABLE `build` (
 --
 
 INSERT INTO `build` (`build_id`, `proj_id`, `sp_id`, `version_id`, `drop_id`, `descr`, `created_at`, `updated_at`) VALUES
-(7, 1, 'SP1', '1', 'DROP1', 'SAVERS1.1DROP1', '2020-01-05 02:02:33', '2020-01-05 02:02:33'),
-(9, 3, 'SP1', '1', 'DROP1', 'NETCOST1.1DROP1', '2020-01-05 02:06:04', '2020-01-05 02:06:04');
+(1, 1, 'SP1', '1', 'DROP1', 'SAVERS1.1DROP1', '2020-01-05 02:02:33', '2020-01-05 02:02:33'),
+(2, 3, 'SP1', '1', 'DROP1', 'NETCOST1.1DROP1', '2020-01-05 02:06:04', '2020-01-05 02:06:04');
 
 -- --------------------------------------------------------
 
@@ -278,10 +278,10 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`emp_id`, `emp_number`, `last_name`, `first_name`, `middle_name`, `nick_name`, `birthdate`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, '0001', 'Trump', 'Donald', NULL, NULL, '2020-01-05', '1578164394.jpeg', NULL, NULL),
-(2, '0002', 'Panelo', 'Salvador', NULL, NULL, '2020-01-01', 'user3-128x128.jpg', NULL, NULL),
-(3, '0003', 'James', 'Lebron', NULL, NULL, '2020-01-01', '1578181204.jpeg', NULL, NULL),
-(4, '0004', 'Leonard', 'Kawhi', NULL, NULL, '2020-01-30', '1578181204.jpeg', NULL, NULL);
+(1, '1234', 'Trump', 'Donald', NULL, NULL, '2020-01-05', '1578164394.jpeg', NULL, NULL),
+(2, '5678', 'Panelo', 'Salvador', NULL, NULL, '2020-01-01', 'user3-128x128.jpg', NULL, NULL),
+(3, '9101', 'James', 'Lebron', NULL, NULL, '2020-01-01', '1578181204.jpeg', NULL, NULL),
+(4, '2345', 'Leonard', 'Kawhi', NULL, NULL, '2020-01-30', '1578181204.jpeg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -383,9 +383,9 @@ CREATE TABLE `pointsitem` (
 --
 
 INSERT INTO `pointsitem` (`pointsitem_id`, `name`, `task_id`, `itemcriteria_id`, `created_at`, `updated_at`) VALUES
-(1, 'POS.SCL', '0001', 1, NULL, NULL),
-(2, 'pos.sql', '0002', 2, NULL, NULL),
-(3, 'item1', '0001', 3, NULL, NULL);
+(1, 'POS.SCL', 'ENH00001', 1, NULL, NULL),
+(2, 'POS.SCL', 'BUG00002', 2, NULL, NULL),
+(3, 'Sample.vb', 'ENH00001', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -433,10 +433,10 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`task_id`, `name`, `inc_type`, `severity`, `started_at`, `completed_at`, `emp_id`, `build_id`, `created_at`, `updated_at`) VALUES
-('0001', 'Testing Deployment 1', 'enhancement', 'low', '2020-05-05', '2020-06-06', 3, 1, '2020-01-04 19:30:19', '2020-01-04 19:30:19'),
-('0002', 'Testing Deployment Number 2', 'bug', 'high', '2020-01-01', '2020-02-02', 3, 2, '2020-01-04 19:40:13', '2020-01-04 19:40:13'),
-('0003', 'Deployment', 'task', 'medium', '2020-05-01', '2020-06-01', 3, 2, '2020-01-04 20:01:54', '2020-01-04 20:01:54'),
-('ENH00001', 'SP39.1 Drop1 (TSK19803) - GS - Diagnostic Error occurred upon tendering Mgr overriden RX coupon', 'enhancement', 'high', '1992-05-11', '1992-05-11', 4, 7, '2020-01-05 07:26:51', '2020-01-05 07:26:51');
+('ENH00001', 'Testing Deployment 1', 'enhancement', 'low', '2020-05-05', '2020-06-06', 3, 1, '2020-01-04 19:30:19', '2020-01-04 19:30:19'),
+('BUG00002', 'Testing Deployment Number 2', 'bug', 'high', '2020-01-01', '2020-02-02', 3, 2, '2020-01-04 19:40:13', '2020-01-04 19:40:13'),
+('TSK00003', 'Deployment', 'task', 'medium', '2020-05-01', '2020-06-01', 3, 2, '2020-01-04 20:01:54', '2020-01-04 20:01:54'),
+('ENH00002', 'SP39.1 Drop1 (TSK19803) - GS - Diagnostic Error occurred upon tendering Mgr overriden RX coupon', 'enhancement', 'high', '1992-05-11', '1992-05-11', 4, 1, '2020-01-05 07:26:51', '2020-01-05 07:26:51');
 
 -- --------------------------------------------------------
 
