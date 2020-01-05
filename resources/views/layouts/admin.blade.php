@@ -76,14 +76,6 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{  route('project') }}" class="nav-link">
-                                    <i class="fas fa-check-circle nav-icon"></i>
-                                    <p>Project</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item has-treeview {{ (Route::is(['tasks', 'tasks-create'])) ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link {{ (Route::is(['tasks', 'tasks-create'])) ? 'active' : '' }}">
