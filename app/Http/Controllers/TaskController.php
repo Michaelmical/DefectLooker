@@ -44,7 +44,7 @@ class TaskController extends Controller
     {
         request()->validate([
             'iBuildId'       => 'required',
-            'sTaskId'         => 'required',
+            'sTaskId'        => 'required',
             'sIncType'       => 'required',
             'sSeverity'      => 'required',
             'sStartDate'     => 'required',
@@ -65,48 +65,77 @@ class TaskController extends Controller
 
         return empty($aData) === true ?
             response()->json([
-            'result'  => false,
-            'message' => 'Failed'
+                'result'  => false,
+                'message' => 'Failed'
             ])
             :
             response()->json([
-            'result' => true,
-            'data'   => $aData
+                'result' => true,
+                'data'   => $aData
             ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Task $task)
+
+    public function show(Task $task, $taskid)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
+     * @param Task $task
+     * @param $taskid
+     * @return Factory|\Illuminate\Http\RedirectResponse|View
      */
-    public function edit(Task $task)
+    public function edit(Task $task, $taskid)
     {
-        //
+        $aTaskData = Task::where('task_id', $taskid)->first();
+        if (empty($aTaskData) === true) {
+            return redirect()->route('tasks');
+        }
+        $aBuildData = Build::all();
+        foreach ($aBuildData as $aData) {
+            $aData['active'] = $aData['build_id'] === $aTaskData['build_id'] ? 'active' : '';
+        }
+
+        $aIncType = [
+            ['types' => 'bug'], ['types' => 'task'], ['types' => 'enhancement']
+        ];
+        foreach ($aIncType as $aDataItem => $svalue) {
+            $aIncType[$aDataItem]['active'] = ($svalue['types'] === $aTaskData['inc_type']) ? 'active' : '';
+        }
+
+        return view('tasks-update', [
+            'aBuildData' => $aBuildData,
+            'aTaskData'  => $aTaskData,
+            'aIncType'   => (object)$aIncType
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Task  $task
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Task $task)
+
+    public function update(Request $request, Task $task, $taskid)
     {
-        //
+        request()->validate([
+            'iBuildId'       => 'required',
+            'sTaskId'        => 'required',
+            'sIncType'       => 'required',
+            'sSeverity'      => 'required',
+            'sStartDate'     => 'required',
+            'sCompletedDate' => 'required',
+            'sDesc'          => 'required'
+        ]);
+
+        $aData = $task->where('task_id', $taskid)->first();
+        $aData->name =  $request->get('sDesc');
+        $aData->inc_type =  $request->get('sIncType');
+        $aData->severity =  $request->get('sSeverity');
+        $aData->started_at =  $request->get('sStartDate');
+        $aData->completed_at =  $request->get('sCompletedDate');
+        $aData->build_id =  $request->get('iBuildId');
+        $aData->save();
+
+        return response()->json($aData);
     }
 
     /**

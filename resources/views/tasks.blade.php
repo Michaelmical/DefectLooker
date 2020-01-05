@@ -22,7 +22,7 @@
                                     <th>Severity</th>
                                     <th width="120px">Date Started</th>
                                     <th width="120px">Date Completed</th>
-                                    <th>Action</th>
+                                    <th width="80px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,7 +34,14 @@
                                     <td>{{ ucfirst($aData->severity) }}</td>
                                     <td>{{ ucfirst($aData->started_at) }}</td>
                                     <td>{{ ucfirst($aData->completed_at) }}</td>
-                                    <td></td>
+                                    <td>
+                                        <a class="btn btn-warning" href="tasks/{{ $aData->task_id }}/edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-danger btnTaskDelete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

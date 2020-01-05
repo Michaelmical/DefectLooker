@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8bfbe77-64cd-4c6d-8011-1d218374a011" name="Default Changelist" comment="" />
+    <list default="true" id="a8bfbe77-64cd-4c6d-8011-1d218374a011" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/tasks-update.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/customjs/task-store.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/customjs/task-store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/tasks.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tasks.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -127,11 +136,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ASTA" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\DefectLooker\resources\views" />
       <recent name="D:\xampp\htdocs\DefectLooker\public\customjs" />
     </key>
   </component>
@@ -152,6 +162,7 @@
         </serviceView>
       </list>
     </option>
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -165,6 +176,7 @@
       <updated>1578112637396</updated>
       <workItem from="1578112674035" duration="37547000" />
       <workItem from="1578180622557" duration="11590000" />
+      <workItem from="1578198315742" duration="10798000" />
     </task>
     <servers />
   </component>
@@ -172,11 +184,15 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="491" y="195" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578196448608">
+    <state x="491" y="195" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1578201855972">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="491" y="195" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1578196448608" />
+    <state x="491" y="195" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1578201855972" />
     <state x="690" y="281" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1578140499981" />
+    <state x="463" y="120" key="FileChooserDialogImpl" timestamp="1578198694936">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="463" y="120" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1578198694936" />
     <state x="470" y="243" key="com.intellij.ide.util.TipDialog" timestamp="1578152807967">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

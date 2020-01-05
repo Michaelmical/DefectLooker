@@ -59,8 +59,7 @@ class AuthController extends Controller
 
     public function sessionhere()
     {
-//        return session()->all();
-        return  response()->json(DB::table('task')->get());
+        return session()->all();
     }
 
 //    public function postRegistration(Request $request)
