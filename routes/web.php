@@ -47,6 +47,10 @@ Route::post('functionpoints',       'FunctionPointsController@store')->name('fun
 
 Route::get('areatype/{id}',      'AreaTypeController@show')->name('areatype-show');
 
+Route::get('defects', 'DefectsController@index')->name('defects');
+Route::get('defects/create', 'DefectsController@create')->name('defects-create');
+Route::post('defects', 'DefectsController@store')->name('defects.store');
+
 //Route::get('/resourceName',                 'ControllerName@index');
 //Route::get('/resourceName/{resource}',      'ControllerName@show');
 //Route::get('/resourceName/create',          'ControllerName@create');

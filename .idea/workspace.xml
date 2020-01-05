@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8bfbe77-64cd-4c6d-8011-1d218374a011" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FunctionPointsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FunctionPointsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/build-create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/build-create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/functionpoints-create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/functionpoints-create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/functionpoints.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/functionpoints.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/defects-create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/defects.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/admin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/task-create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/task-create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

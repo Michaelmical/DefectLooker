@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2020 at 11:20 AM
+-- Generation Time: Jan 05, 2020 at 04:45 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -100,8 +100,8 @@ CREATE TABLE `build` (
 --
 
 INSERT INTO `build` (`build_id`, `proj_id`, `sp_id`, `version_id`, `drop_id`, `descr`, `created_at`, `updated_at`) VALUES
-(7, 1, 'SP1', '1', 'DROP1', 'SAVERS1.1DROP1', '2020-01-05 02:02:33', '2020-01-05 02:02:33'),
-(9, 3, 'SP1', '1', 'DROP1', 'NETCOST1.1DROP1', '2020-01-05 02:06:04', '2020-01-05 02:06:04');
+(1, 1, 'SP1', '1', 'DROP1', 'SAVERS1.1DROP1', '2020-01-05 02:02:33', '2020-01-05 02:02:33'),
+(2, 3, 'SP1', '1', 'DROP1', 'NETCOST1.1DROP1', '2020-01-05 02:06:04', '2020-01-05 02:06:04');
 
 -- --------------------------------------------------------
 
@@ -185,7 +185,7 @@ INSERT INTO `complex` (`complex_id`, `descr`, `weight`, `criteria`, `areatype_id
 
 CREATE TABLE `defects` (
   `defects_id` bigint(20) UNSIGNED NOT NULL,
-  `orig_ref_id` int(11) NOT NULL,
+  `orig_ref_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `task_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `defect_type_id` int(11) NOT NULL,
   `defect_cause_id` int(11) NOT NULL,
@@ -194,6 +194,13 @@ CREATE TABLE `defects` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `defects`
+--
+
+INSERT INTO `defects` (`defects_id`, `orig_ref_id`, `task_id`, `defect_type_id`, `defect_cause_id`, `area_category`, `remarks`, `created_at`, `updated_at`) VALUES
+(1, '0002', '0001', 1, 1, 'Be Positive', 'Be Positive', '2020-01-05 07:24:17', '2020-01-05 07:24:17');
 
 -- --------------------------------------------------------
 
@@ -213,11 +220,15 @@ CREATE TABLE `defect_cause` (
 --
 
 INSERT INTO `defect_cause` (`defect_cause_id`, `desc_cause`, `created_at`, `updated_at`) VALUES
-(1, 'Logic Error', NULL, NULL),
-(2, 'Missed functionality\r\n', NULL, NULL),
-(3, 'Missed requirement\r\n', NULL, NULL),
-(4, 'Data Error\r\n', NULL, NULL),
-(5, 'Other error\r\n', NULL, NULL);
+(1, 'Inadequate Self-review/Testing\r\n', NULL, NULL),
+(2, 'Inconsistent Requirements\r\n', NULL, NULL),
+(3, 'Incomplete Requirements\r\n', NULL, NULL),
+(4, 'Incompatible versions\r\n', NULL, NULL),
+(5, 'Data Error - Missing\r\n', NULL, NULL),
+(6, 'Data Error - Incorrect\r\n', NULL, NULL),
+(7, 'User Error\r\n', NULL, NULL),
+(8, 'Lack of Training\r\n', NULL, NULL),
+(9, 'Others\r\n', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -237,15 +248,11 @@ CREATE TABLE `defect_type` (
 --
 
 INSERT INTO `defect_type` (`defect_type_id`, `desc_type`, `created_at`, `updated_at`) VALUES
-(1, 'Inadequate Self-review/Testing\r\n', NULL, NULL),
-(2, 'Inconsistent Requirements\r\n', NULL, NULL),
-(3, 'Incomplete Requirements\r\n', NULL, NULL),
-(4, 'Incompatible versions\r\n', NULL, NULL),
-(5, 'Data Error - Missing\r\n', NULL, NULL),
-(6, 'Data Error - Incorrect\r\n', NULL, NULL),
-(7, 'User Error\r\n', NULL, NULL),
-(8, 'Lack of Training\r\n', NULL, NULL),
-(9, 'Others\r\n', NULL, NULL);
+(1, 'Logic Error', NULL, NULL),
+(2, 'Missed functionality\r\n', NULL, NULL),
+(3, 'Missed requirement\r\n', NULL, NULL),
+(4, 'Data Error\r\n', NULL, NULL),
+(5, 'Other error\r\n', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -271,10 +278,10 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`emp_id`, `emp_number`, `last_name`, `first_name`, `middle_name`, `nick_name`, `birthdate`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, '0001', 'Trump', 'Donald', NULL, NULL, '2020-01-05', '1578164394.jpeg', NULL, NULL),
-(2, '0002', 'Panelo', 'Salvador', NULL, NULL, '2020-01-01', 'user3-128x128.jpg', NULL, NULL),
-(3, '0003', 'James', 'Lebron', NULL, NULL, '2020-01-01', '1578181204.jpeg', NULL, NULL),
-(4, '0004', 'Leonard', 'Kawhi', NULL, NULL, '2020-01-30', '1578181204.jpeg', NULL, NULL);
+(1, '1234', 'Trump', 'Donald', NULL, NULL, '2020-01-05', '1578164394.jpeg', NULL, NULL),
+(2, '5678', 'Panelo', 'Salvador', NULL, NULL, '2020-01-01', 'user3-128x128.jpg', NULL, NULL),
+(3, '9101', 'James', 'Lebron', NULL, NULL, '2020-01-01', '1578181204.jpeg', NULL, NULL),
+(4, '2345', 'Leonard', 'Kawhi', NULL, NULL, '2020-01-30', '1578181204.jpeg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -288,6 +295,15 @@ CREATE TABLE `itemcriteria` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `itemcriteria`
+--
+
+INSERT INTO `itemcriteria` (`itemcriteria_id`, `complex_id`, `created_at`, `updated_at`) VALUES
+(1, 44, NULL, NULL),
+(2, 44, NULL, NULL),
+(3, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -362,6 +378,15 @@ CREATE TABLE `pointsitem` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `pointsitem`
+--
+
+INSERT INTO `pointsitem` (`pointsitem_id`, `name`, `task_id`, `itemcriteria_id`, `created_at`, `updated_at`) VALUES
+(1, 'POS.SCL', 'ENH00001', 1, NULL, NULL),
+(2, 'POS.SCL', 'BUG00002', 2, NULL, NULL),
+(3, 'Sample.vb', 'ENH00001', 3, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -408,9 +433,10 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`task_id`, `name`, `inc_type`, `severity`, `started_at`, `completed_at`, `emp_id`, `build_id`, `created_at`, `updated_at`) VALUES
-('0001', 'Testing Deployment 1', 'enhancement', 'low', '2020-05-05', '2020-06-06', 3, 1, '2020-01-04 19:30:19', '2020-01-04 19:30:19'),
-('0002', 'Testing Deployment Number 2', 'bug', 'high', '2020-01-01', '2020-02-02', 3, 2, '2020-01-04 19:40:13', '2020-01-04 19:40:13'),
-('0003', 'Deployment', 'task', 'medium', '2020-05-01', '2020-06-01', 3, 2, '2020-01-04 20:01:54', '2020-01-04 20:01:54');
+('ENH00001', 'Testing Deployment 1', 'enhancement', 'low', '2020-05-05', '2020-06-06', 3, 1, '2020-01-04 19:30:19', '2020-01-04 19:30:19'),
+('BUG00002', 'Testing Deployment Number 2', 'bug', 'high', '2020-01-01', '2020-02-02', 3, 2, '2020-01-04 19:40:13', '2020-01-04 19:40:13'),
+('TSK00003', 'Deployment', 'task', 'medium', '2020-05-01', '2020-06-01', 3, 2, '2020-01-04 20:01:54', '2020-01-04 20:01:54'),
+('ENH00002', 'SP39.1 Drop1 (TSK19803) - GS - Diagnostic Error occurred upon tendering Mgr overriden RX coupon', 'enhancement', 'high', '1992-05-11', '1992-05-11', 4, 1, '2020-01-05 07:26:51', '2020-01-05 07:26:51');
 
 -- --------------------------------------------------------
 
@@ -553,7 +579,7 @@ ALTER TABLE `areatype`
 -- AUTO_INCREMENT for table `build`
 --
 ALTER TABLE `build`
-  MODIFY `build_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `build_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `complex`
@@ -565,13 +591,13 @@ ALTER TABLE `complex`
 -- AUTO_INCREMENT for table `defects`
 --
 ALTER TABLE `defects`
-  MODIFY `defects_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `defects_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `defect_cause`
 --
 ALTER TABLE `defect_cause`
-  MODIFY `defect_cause_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `defect_cause_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `defect_type`
@@ -589,7 +615,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `itemcriteria`
 --
 ALTER TABLE `itemcriteria`
-  MODIFY `itemcriteria_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `itemcriteria_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -607,7 +633,7 @@ ALTER TABLE `permissiongroup`
 -- AUTO_INCREMENT for table `pointsitem`
 --
 ALTER TABLE `pointsitem`
-  MODIFY `pointsitem_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `pointsitem_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `project`
