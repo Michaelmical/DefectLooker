@@ -14,8 +14,7 @@ class CreateTaskTable extends Migration
     public function up()
     {
         Schema::create('task', function (Blueprint $table) {
-            $table->increments('task_id');
-            $table->string('ref_id', 8);
+            $table->string('task_id', 8)->primary();
             $table->enum('inc_type', ['bug','task','enhancement']);
             $table->enum('severity', ['low','medium','high']);
             $table->date('started_at');

@@ -16,7 +16,7 @@ class CreatePointsitemTable extends Migration
         Schema::create('pointsitem', function (Blueprint $table) {
             $table->increments('pointsitem_id');
             $table->string('name');
-            $table->integer('task_id');
+            $table->string('task_id');
             $table->integer('itemcriteria_id');
             $table->timestamps();
         });

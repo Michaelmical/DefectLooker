@@ -16,11 +16,11 @@ class CreateDefectsTable extends Migration
         Schema::create('defects', function (Blueprint $table) {
             $table->bigIncrements('defects_id');
             $table->integer('orig_ref_id'); // task table child
-            $table->integer('task_id'); // task table child
+            $table->string('task_id'); // task table child
             $table->integer('defect_type_id');
             $table->integer('defect_cause_id');
             $table->string('area_category');
-            $table->text('remakes');
+            $table->text('remarks');
             $table->timestamps();
         });
     }
