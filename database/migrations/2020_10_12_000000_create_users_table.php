@@ -17,9 +17,14 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('emp_id');
-            $table->smallInteger('grp_id');
+            $table->integer('emp_id')->unsigned();
+            $table->smallInteger('grp_id')->unsigned();
             $table->timestamps();
+        });
+
+        Schema::table('users', function($table) {
+            $table->foreign('grp_id')->references('grp_id')->on('permissiongroup');
+            $table->foreign('emp_id')->references('emp_id')->on('employee');
         });
 
         $data = array(

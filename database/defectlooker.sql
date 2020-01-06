@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2020 at 04:45 PM
+-- Generation Time: Jan 06, 2020 at 07:28 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -40,12 +40,12 @@ CREATE TABLE `area` (
 --
 
 INSERT INTO `area` (`area_id`, `descr`, `created_at`, `updated_at`) VALUES
-(1, 'api', NULL, NULL),
-(2, 'screens', NULL, NULL),
-(3, 'database', NULL, NULL),
-(4, 'reports', NULL, NULL),
-(5, 'configurations', NULL, NULL),
-(6, 'ut scenarios', NULL, NULL);
+(1, 'API', NULL, NULL),
+(2, 'SCREENS', NULL, NULL),
+(3, 'DATABASE', NULL, NULL),
+(4, 'REPORTS', NULL, NULL),
+(5, 'CONFIGURATIONS', NULL, NULL),
+(6, 'UT SCENARIOS', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,7 @@ INSERT INTO `area` (`area_id`, `descr`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `areatype` (
   `areatype_id` int(10) UNSIGNED NOT NULL,
   `descr` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `area_id` int(11) NOT NULL,
+  `area_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -66,17 +66,17 @@ CREATE TABLE `areatype` (
 --
 
 INSERT INTO `areatype` (`areatype_id`, `descr`, `area_id`, `created_at`, `updated_at`) VALUES
-(1, 'methods/properities', 1, NULL, NULL),
-(2, 'xaml/vb/resx', 2, NULL, NULL),
-(3, 'schema', 3, NULL, NULL),
-(4, 'data', 3, NULL, NULL),
-(5, 'views', 3, NULL, NULL),
-(6, 'stored procedure', 3, NULL, NULL),
-(7, 'layout', 4, NULL, NULL),
-(8, 'data retrieval', 4, NULL, NULL),
-(9, 'data transformation', 4, NULL, NULL),
-(10, 'xpa/scl', 5, NULL, NULL),
-(11, 'scenarios', 6, NULL, NULL);
+(1, 'METHODS/PROPERTIES', 1, NULL, NULL),
+(2, 'XAML/VB/RESX', 2, NULL, NULL),
+(3, 'SCHEMA', 3, NULL, NULL),
+(4, 'DATA', 3, NULL, NULL),
+(5, 'VIEWS', 3, NULL, NULL),
+(6, 'STORED PROC', 3, NULL, NULL),
+(7, 'LAYOUT', 4, NULL, NULL),
+(8, 'DATA RETRIEVAL', 4, NULL, NULL),
+(9, 'DATA TRANSFORMATION', 4, NULL, NULL),
+(10, 'XPA/SCL', 5, NULL, NULL),
+(11, 'SCENARIOS', 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,9 +87,6 @@ INSERT INTO `areatype` (`areatype_id`, `descr`, `area_id`, `created_at`, `update
 CREATE TABLE `build` (
   `build_id` int(10) UNSIGNED NOT NULL,
   `proj_id` int(11) NOT NULL,
-  `sp_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `drop_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `descr` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -99,9 +96,10 @@ CREATE TABLE `build` (
 -- Dumping data for table `build`
 --
 
-INSERT INTO `build` (`build_id`, `proj_id`, `sp_id`, `version_id`, `drop_id`, `descr`, `created_at`, `updated_at`) VALUES
-(1, 1, 'SP1', '1', 'DROP1', 'SAVERS1.1DROP1', '2020-01-05 02:02:33', '2020-01-05 02:02:33'),
-(2, 1, 'SP1', '1', 'DROP2', 'SAVERS1.1DROP2', '2020-01-05 02:06:04', '2020-01-05 02:06:04');
+INSERT INTO `build` (`build_id`, `proj_id`, `descr`, `created_at`, `updated_at`) VALUES
+(1, 1, 'TASKFORCE1.0DROP1', NULL, NULL),
+(2, 2, 'SAVERS1.0DROP1', NULL, NULL),
+(3, 3, 'CHICOS1.0DROP1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -195,13 +193,6 @@ CREATE TABLE `defects` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `defects`
---
-
-INSERT INTO `defects` (`defects_id`, `orig_ref_id`, `task_id`, `defect_type_id`, `defect_cause_id`, `area_category`, `remarks`, `created_at`, `updated_at`) VALUES
-(1, '0002', '0001', 1, 1, 'Be Positive', 'Be Positive', '2020-01-05 07:24:17', '2020-01-05 07:24:17');
-
 -- --------------------------------------------------------
 
 --
@@ -220,15 +211,15 @@ CREATE TABLE `defect_cause` (
 --
 
 INSERT INTO `defect_cause` (`defect_cause_id`, `desc_cause`, `created_at`, `updated_at`) VALUES
-(1, 'Inadequate Self-review/Testing\r\n', NULL, NULL),
-(2, 'Inconsistent Requirements\r\n', NULL, NULL),
-(3, 'Incomplete Requirements\r\n', NULL, NULL),
-(4, 'Incompatible versions\r\n', NULL, NULL),
-(5, 'Data Error - Missing\r\n', NULL, NULL),
-(6, 'Data Error - Incorrect\r\n', NULL, NULL),
-(7, 'User Error\r\n', NULL, NULL),
-(8, 'Lack of Training\r\n', NULL, NULL),
-(9, 'Others\r\n', NULL, NULL);
+(1, 'Inadequate Self-review/Testing', NULL, NULL),
+(2, 'Inconsistent Requirements', NULL, NULL),
+(3, 'Incomplete Requirements', NULL, NULL),
+(4, 'Incompatible versions', NULL, NULL),
+(5, 'Data Error - Missing', NULL, NULL),
+(6, 'Data Error - Incorrect', NULL, NULL),
+(7, 'User Error', NULL, NULL),
+(8, 'Lack of Training', NULL, NULL),
+(9, 'Others', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -249,10 +240,10 @@ CREATE TABLE `defect_type` (
 
 INSERT INTO `defect_type` (`defect_type_id`, `desc_type`, `created_at`, `updated_at`) VALUES
 (1, 'Logic Error', NULL, NULL),
-(2, 'Missed functionality\r\n', NULL, NULL),
-(3, 'Missed requirement\r\n', NULL, NULL),
-(4, 'Data Error\r\n', NULL, NULL),
-(5, 'Other error\r\n', NULL, NULL);
+(2, 'Missed functionality', NULL, NULL),
+(3, 'Missed requirement', NULL, NULL),
+(4, 'Data Error', NULL, NULL),
+(5, 'Other error', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -278,10 +269,9 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`emp_id`, `emp_number`, `last_name`, `first_name`, `middle_name`, `nick_name`, `birthdate`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, '1234', 'Trump', 'Donald', NULL, NULL, '2020-01-05', '1578164394.jpeg', NULL, NULL),
-(2, '5678', 'Panelo', 'Salvador', NULL, NULL, '2020-01-01', 'user3-128x128.jpg', NULL, NULL),
-(3, '9101', 'James', 'Lebron', NULL, NULL, '2020-01-01', '1578181204.jpeg', NULL, NULL),
-(4, '2345', 'Leonard', 'Kawhi', NULL, NULL, '2020-01-30', '1578181204.jpeg', NULL, NULL);
+(1, '4100035', 'SPENCER', 'KARA', 'ARNOLD', 'KAY', '1992-01-01', 'user1-128x128.jpg', NULL, NULL),
+(2, '4200040', 'PATTON', 'GERTRUDE', 'MALONE', 'GERT', '1993-01-01', 'user2-160x160.jpg', NULL, NULL),
+(3, '4300045', 'JACOBS', 'DARIN', 'FULLER', 'RIN', '1992-01-01', 'user3-128x128.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -295,15 +285,6 @@ CREATE TABLE `itemcriteria` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `itemcriteria`
---
-
-INSERT INTO `itemcriteria` (`itemcriteria_id`, `complex_id`, `created_at`, `updated_at`) VALUES
-(1, 44, NULL, NULL),
-(2, 44, NULL, NULL),
-(3, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -322,24 +303,20 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2020_01_02_152437_create_permissiongroup_table', 1),
-(3, '2020_01_02_162750_create_employee_table', 1),
-(4, '2020_01_03_141444_create_project_table', 1),
-(5, '2020_01_03_142030_create_task_table', 1),
-(6, '2020_01_03_174633_create_pointsitem_table', 1),
-(7, '2020_01_03_180224_create_itemcriteria_table', 1),
-(8, '2020_01_04_023810_create_area_table', 1),
-(9, '2020_01_04_024111_create_areatype_table', 1),
-(10, '2020_01_04_024330_create_complex_table', 1),
-(11, '2020_01_05_012735_create_build_table', 1),
-(12, '2020_01_05_014159_create_defect_type_table', 1),
-(13, '2020_01_05_014238_create_defect_cause_table', 1),
-(14, '2020_01_05_014320_create_defects_table', 1),
-(15, '2020_01_03_152030_create_task_table', 2),
-(16, '2020_01_03_162030_create_task_table', 3),
-(17, '2020_01_03_172030_create_task_table', 4),
-(18, '2020_01_03_182030_create_task_table', 5);
+(1, '2020_01_02_152437_create_permissiongroup_table', 1),
+(2, '2020_01_02_162750_create_employee_table', 1),
+(3, '2020_01_03_141444_create_project_table', 1),
+(4, '2020_01_03_174633_create_pointsitem_table', 1),
+(5, '2020_01_03_180224_create_itemcriteria_table', 1),
+(6, '2020_01_03_182030_create_task_table', 1),
+(7, '2020_01_04_023810_create_area_table', 1),
+(8, '2020_01_04_024111_create_areatype_table', 1),
+(9, '2020_01_04_024330_create_complex_table', 1),
+(10, '2020_01_05_012735_create_build_table', 1),
+(11, '2020_01_05_014159_create_defect_type_table', 1),
+(12, '2020_01_05_014238_create_defect_cause_table', 1),
+(13, '2020_01_05_014320_create_defects_table', 1),
+(14, '2020_10_12_000000_create_users_table', 1);
 
 -- --------------------------------------------------------
 
@@ -349,7 +326,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `permissiongroup` (
   `grp_id` smallint(5) UNSIGNED NOT NULL,
-  `type` enum('superadmin','admin','user') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` enum('SUPERADMIN','ADMIN','USER') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -359,9 +336,9 @@ CREATE TABLE `permissiongroup` (
 --
 
 INSERT INTO `permissiongroup` (`grp_id`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'superadmin', NULL, NULL),
-(2, 'admin', NULL, NULL),
-(3, 'admin', NULL, NULL);
+(1, 'SUPERADMIN', NULL, NULL),
+(2, 'ADMIN', NULL, NULL),
+(3, 'USER', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -377,15 +354,6 @@ CREATE TABLE `pointsitem` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pointsitem`
---
-
-INSERT INTO `pointsitem` (`pointsitem_id`, `name`, `task_id`, `itemcriteria_id`, `created_at`, `updated_at`) VALUES
-(1, 'POS.SCL', 'ENH00001', 1, NULL, NULL),
-(2, 'POS.SCL', 'BUG00002', 2, NULL, NULL),
-(3, 'Sample.vb', 'ENH00001', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -405,9 +373,9 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`proj_id`, `proj_name`, `created_at`, `updated_at`) VALUES
-(1, 'SAVERS', NULL, NULL),
-(2, 'CHICOS', NULL, NULL),
-(3, 'NETCOST', NULL, NULL);
+(1, 'TASKFORCE', NULL, NULL),
+(2, 'SAVERS', NULL, NULL),
+(3, 'CHICOS', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -418,12 +386,12 @@ INSERT INTO `project` (`proj_id`, `proj_name`, `created_at`, `updated_at`) VALUE
 CREATE TABLE `task` (
   `task_id` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `inc_type` enum('bug','task','enhancement') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `severity` enum('low','medium','high') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `inc_type` enum('BUG','TASK','ENHANCEMENT') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `severity` enum('LOW','MEDIUM','HIGH') COLLATE utf8mb4_unicode_ci NOT NULL,
   `started_at` date NOT NULL,
   `completed_at` date NOT NULL,
   `emp_id` int(11) NOT NULL,
-  `build_id` int(10) NOT NULL,
+  `build_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -433,10 +401,9 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`task_id`, `name`, `inc_type`, `severity`, `started_at`, `completed_at`, `emp_id`, `build_id`, `created_at`, `updated_at`) VALUES
-('ENH00001', 'Testing Deployment 1', 'enhancement', 'low', '2020-05-05', '2020-06-06', 3, 1, '2020-01-04 19:30:19', '2020-01-04 19:30:19'),
-('BUG00002', 'Testing Deployment Number 2', 'bug', 'high', '2020-01-01', '2020-02-02', 3, 2, '2020-01-04 19:40:13', '2020-01-04 19:40:13'),
-('TSK00003', 'Deployment', 'task', 'medium', '2020-05-01', '2020-06-01', 3, 2, '2020-01-04 20:01:54', '2020-01-04 20:01:54'),
-('ENH00002', 'SP39.1 Drop1 (TSK19803) - GS - Diagnostic Error occurred upon tendering Mgr overriden RX coupon', 'enhancement', 'high', '1992-05-11', '1992-05-11', 4, 1, '2020-01-05 07:26:51', '2020-01-05 07:26:51');
+('ENH00001', 'EXAMPLE OF ENH NAME', 'ENHANCEMENT', 'HIGH', '2019-12-30', '2020-01-05', 1, 1, NULL, NULL),
+('TSK00001', 'EXAMPLE OF TASK NAME1', 'TASK', 'MEDIUM', '2019-12-29', '2020-01-04', 2, 1, NULL, NULL),
+('TSK00002', 'EXAMPLE OF TASK NAME2', 'TASK', 'LOW', '2019-12-28', '2020-01-03', 2, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -448,8 +415,8 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `emp_id` int(11) NOT NULL,
-  `grp_id` smallint(6) NOT NULL,
+  `emp_id` int(10) UNSIGNED NOT NULL,
+  `grp_id` smallint(5) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -459,10 +426,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `emp_id`, `grp_id`, `created_at`, `updated_at`) VALUES
-(1, 'superadmin@example.com', '5f4dcc3b5aa765d61d8327deb882cf99', 1, 1, NULL, NULL),
-(2, 'admin@example.com', '5f4dcc3b5aa765d61d8327deb882cf99', 2, 2, NULL, NULL),
-(3, 'user1@example.com', '5f4dcc3b5aa765d61d8327deb882cf99', 3, 3, NULL, NULL),
-(4, 'user2@example.com', '5f4dcc3b5aa765d61d8327deb882cf99', 4, 3, NULL, NULL);
+(1, 'superadmin@gmail.com', '$2y$10$8.WCAUtchK0mAaOnAGS.TuXYmPVoS3IJsZ.fAinPdLCYfiJFbhzdS', 1, 1, NULL, NULL),
+(2, 'admin@gmail.com', '$2y$10$6GzdrmzKr.doVtAAH2zHru2h.HzNixVkPhjDaLzAfl0c8hBblXhje', 2, 2, NULL, NULL),
+(3, 'user1@gmail.com', '$2y$10$hEHxDiFUTew7EAdCVfyiluJiLOB64blqxF/fR.jxeGlYTPUwjgG/q', 3, 3, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -478,7 +444,8 @@ ALTER TABLE `area`
 -- Indexes for table `areatype`
 --
 ALTER TABLE `areatype`
-  ADD PRIMARY KEY (`areatype_id`);
+  ADD PRIMARY KEY (`areatype_id`),
+  ADD KEY `areatype_area_id_foreign` (`area_id`);
 
 --
 -- Indexes for table `build`
@@ -557,7 +524,9 @@ ALTER TABLE `task`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `users_grp_id_foreign` (`grp_id`),
+  ADD KEY `users_emp_id_foreign` (`emp_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -579,7 +548,7 @@ ALTER TABLE `areatype`
 -- AUTO_INCREMENT for table `build`
 --
 ALTER TABLE `build`
-  MODIFY `build_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `build_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `complex`
@@ -591,7 +560,7 @@ ALTER TABLE `complex`
 -- AUTO_INCREMENT for table `defects`
 --
 ALTER TABLE `defects`
-  MODIFY `defects_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `defects_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `defect_cause`
@@ -603,25 +572,25 @@ ALTER TABLE `defect_cause`
 -- AUTO_INCREMENT for table `defect_type`
 --
 ALTER TABLE `defect_type`
-  MODIFY `defect_type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `defect_type_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `emp_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `itemcriteria`
 --
 ALTER TABLE `itemcriteria`
-  MODIFY `itemcriteria_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `itemcriteria_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `permissiongroup`
@@ -633,7 +602,7 @@ ALTER TABLE `permissiongroup`
 -- AUTO_INCREMENT for table `pointsitem`
 --
 ALTER TABLE `pointsitem`
-  MODIFY `pointsitem_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pointsitem_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `project`
@@ -645,7 +614,24 @@ ALTER TABLE `project`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `areatype`
+--
+ALTER TABLE `areatype`
+  ADD CONSTRAINT `areatype_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `area` (`area_id`);
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_emp_id_foreign` FOREIGN KEY (`emp_id`) REFERENCES `employee` (`emp_id`),
+  ADD CONSTRAINT `users_grp_id_foreign` FOREIGN KEY (`grp_id`) REFERENCES `permissiongroup` (`grp_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

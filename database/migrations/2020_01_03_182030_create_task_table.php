@@ -31,9 +31,9 @@ class CreateTaskTable extends Migration
                 'name'          => 'EXAMPLE OF ENH NAME',
                 'inc_type'      => 'ENHANCEMENT',
                 'severity'      => 'HIGH',
-                'started_at'    => date('yyyy/mm/dd',strtotime("-7 days")),
-                'completed_at'  => date('yyyy/mm/dd',strtotime("-1 days")),
-                'emp_id'        => '4100035',
+                'started_at'    => date('Y/m/d',strtotime("-7 days")),
+                'completed_at'  => date('Y/m/d',strtotime("-1 days")),
+                'emp_id'        => '1',
                 'build_id'      => '1',
             ),
             array(
@@ -41,9 +41,9 @@ class CreateTaskTable extends Migration
                 'name'          => 'EXAMPLE OF TASK NAME1',
                 'inc_type'      => 'TASK',
                 'severity'      => 'MEDIUM',
-                'started_at'    => date('yyyy/mm/dd',strtotime("-7 days")),
-                'completed_at'  => date('yyyy/mm/dd',strtotime("-1 days")),
-                'emp_id'        => '4200040',
+                'started_at'    => date('Y/m/d',strtotime("-8 days")),
+                'completed_at'  => date('Y/m/d',strtotime("-2 days")),
+                'emp_id'        => '2',
                 'build_id'      => '1',
             ),
             array(
@@ -51,9 +51,9 @@ class CreateTaskTable extends Migration
                 'name'          => 'EXAMPLE OF TASK NAME2',
                 'inc_type'      => 'TASK',
                 'severity'      => 'LOW',
-                'started_at'    => date('yyyy/mm/dd',strtotime("-7 days")),
-                'completed_at'  => date('yyyy/mm/dd',strtotime("-1 days")),
-                'emp_id'        => '4200040',
+                'started_at'    => date('Y/m/d',strtotime("-9 days")),
+                'completed_at'  => date('Y/m/d',strtotime("-3 days")),
+                'emp_id'        => '2',
                 'build_id'      => '2',
             )
         );

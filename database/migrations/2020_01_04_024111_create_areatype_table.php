@@ -16,8 +16,12 @@ class CreateAreatypeTable extends Migration
         Schema::create('areatype', function (Blueprint $table) {
             $table->increments('areatype_id');
             $table->string('descr');
-            $table->integer('area_id');
+            $table->integer('area_id')->unsigned();
             $table->timestamps();
+        });
+
+        Schema::table('areatype', function($table) {
+            $table->foreign('area_id')->references('area_id')->on('area');
         });
 
         $data = array(
