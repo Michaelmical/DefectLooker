@@ -16,6 +16,19 @@ class DefectsController extends Controller
     public function index()
     {
         //
+
+        $defects = DB::table('defects')->get();
+        $defectTypes = DB::table('defect_type')->get();
+        $defectCauses = DB::table('defect_cause')->get();
+
+        return view('defects',
+            [
+                'defectslist' => $defects,
+                'defecttypelist' => $defectTypes,
+                'defectcauselist' => $defectCauses
+            ]
+        );
+
     }
 
     public function create()

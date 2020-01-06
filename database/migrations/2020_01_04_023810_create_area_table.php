@@ -18,6 +18,29 @@ class CreateAreaTable extends Migration
             $table->string('descr');
             $table->timestamps();
         });
+
+        $data = array(
+            array(
+                'descr'     => 'API'
+            ),
+            array(
+                'descr'     => 'SCREENS'
+            ),
+            array(
+                'descr'     => 'DATABASE'
+            ),
+            array(
+                'descr'     => 'REPORTS'
+            ),
+            array(
+                'descr'     => 'CONFIGURATIONS'
+            ),
+            array(
+                'descr'     => 'UT SCENARIOS'
+            ),
+        );
+
+        DB::table('area')->insert($data);
     }
 
     /**

@@ -16,12 +16,26 @@ class CreateBuildTable extends Migration
         Schema::create('build', function (Blueprint $table) {
             $table->increments('build_id');
             $table->integer('proj_id');
-            $table->string('sp_id');
-            $table->string('version_id');
-            $table->string('drop_id');
             $table->string('descr');
             $table->timestamps();
         });
+
+        $data = array(
+            array(
+                'proj_id'       => '1',
+                'descr'          => 'TASKFORCE1.0DROP1',
+            ),
+            array(
+                'proj_id'       => '2',
+                'descr'          => 'SAVERS1.0DROP1',
+            ),
+            array(
+                'proj_id'       => '3',
+                'descr'          => 'CHICOS1.0DROP1',
+            ),
+        );
+
+        DB::table('build')->insert($data);
     }
 
     /**

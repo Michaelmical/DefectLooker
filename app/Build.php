@@ -8,5 +8,5 @@ class Build extends Model
 {
     protected $table = 'build';
     protected $primaryKey = 'build_id';
-    protected $fillable = ['proj_id', 'sp_id', 'version_id', 'drop_id', 'descr'];
+    protected $fillable = ['proj_id','descr'];
 }

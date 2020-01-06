@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Employee;
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,36 +25,34 @@ class AuthController extends Controller
 
     public function postLogin(Request $request)
     {
+        //return Hash::make('user1pass');
         request()->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
 
-        $sEmail = $request->get('email');
-        $sPassword = $request->get('password');
+        $user = User::where('email', $request->email)->first();
 
-        $aUserData = User::where(['email' => $sEmail, 'password' => md5($sPassword)])->first();
+        if ($user && Hash::check($request->password, $user->password)) {
 
-        if (empty($aUserData) === true) {
+            $employee = Employee::where('emp_id', $user['id'])->first();
+
+            if (empty($user) === false) {
+                session([
+                    'empid' => $user['emp_id'],
+                    'empno' => $user['emp_number'],
+                    'grpid' => $user['grp_id'],
+                    'full_name' => $employee['last_name'],
+                    'userImage' => $employee['image_path']
+                ]);
+                session()->save();
+            }
+
+            return redirect('dashboard');
+
+        }else{
             return redirect()->route('login');
         }
-
-        $aEmpData = Employee::where('emp_id', $aUserData['id'])->first();
-//        $sFullname = $aEmpData['last_name'] . ', ' . $aEmpData['first_name'] . ' ' . $aEmpData['middle_name'];
-
-        if (empty($aUserData) === false) {
-            session([
-                'empid' => $aUserData['emp_id'],
-                'empno' => $aEmpData['emp_number'],
-                'grpid' => $aUserData['grp_id'],
-                'full_name' => $aEmpData['last_name'],
-                'userImage' => $aEmpData['image_path']
-            ]);
-            session()->save();
-        }
-
-        return redirect('dashboard');
-        //return response()->json($sFullname);
 
     }
 

@@ -15,9 +15,23 @@ class CreatePermissiongroupTable extends Migration
     {
         Schema::create('permissiongroup', function (Blueprint $table) {
             $table->smallIncrements('grp_id');
-            $table->enum('type', ['superadmin', 'admin', 'user']);
+            $table->enum('type', ['SUPERADMIN', 'ADMIN', 'USER']);
             $table->timestamps();
         });
+
+        $data = array(
+            array(
+                'type'     => 'SUPERADMIN',
+            ),
+            array(
+                'type'     => 'ADMIN',
+            ),
+            array(
+                'type'     => 'USER',
+            )
+        );
+
+        DB::table('permissiongroup')->insert($data);
     }
 
     /**

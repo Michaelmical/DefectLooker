@@ -18,6 +18,20 @@ class CreateProjectTable extends Migration
             $table->string('proj_name', 50);
             $table->timestamps();
         });
+
+        $data = array(
+            array(
+                'proj_name'     => 'TASKFORCE'
+            ),
+            array(
+                'proj_name'     => 'SAVERS'
+            ),
+            array(
+                'proj_name'     => 'CHICOS'
+            )
+        );
+
+        DB::table('project')->insert($data);
     }
 
     /**

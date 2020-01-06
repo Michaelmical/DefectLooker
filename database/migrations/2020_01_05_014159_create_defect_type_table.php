@@ -18,6 +18,26 @@ class CreateDefectTypeTable extends Migration
             $table->string('desc_type');
             $table->timestamps();
         });
+
+        $data = array(
+            array(
+                'desc_type'     =>  'Logic Error'
+            ),
+            array(
+                'desc_type'     =>  'Missed functionality'
+            ),
+            array(
+                'desc_type'     =>  'Missed requirement'
+            ),
+            array(
+                'desc_type'     =>  'Data Error'
+            ),
+            array(
+                'desc_type'     =>  'Other error'
+            )
+        );
+
+        DB::table('defect_type')->insert($data);
     }
 
     /**

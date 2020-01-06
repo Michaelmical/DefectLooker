@@ -101,7 +101,7 @@ CREATE TABLE `build` (
 
 INSERT INTO `build` (`build_id`, `proj_id`, `sp_id`, `version_id`, `drop_id`, `descr`, `created_at`, `updated_at`) VALUES
 (1, 1, 'SP1', '1', 'DROP1', 'SAVERS1.1DROP1', '2020-01-05 02:02:33', '2020-01-05 02:02:33'),
-(2, 3, 'SP1', '1', 'DROP1', 'NETCOST1.1DROP1', '2020-01-05 02:06:04', '2020-01-05 02:06:04');
+(2, 1, 'SP1', '1', 'DROP2', 'SAVERS1.1DROP2', '2020-01-05 02:06:04', '2020-01-05 02:06:04');
 
 -- --------------------------------------------------------
 
