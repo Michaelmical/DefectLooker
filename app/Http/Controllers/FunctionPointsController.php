@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ItemCriteria;
+use App\PointsItem;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +42,25 @@ class FunctionPointsController extends Controller
 
     public function store(Request $request)
     {
-        return $request->all();
+        $aComplexIds = $request->inputComplex;
+        $aExistingItemCriteriaData = [];
+        foreach ($aComplexIds as $sKey => $iValue) {
+            $oItemCriteria = new ItemCriteria;
+            $oItemCriteria->complex_id = $iValue;
+            $oItemCriteria->save();
+            array_push($aExistingItemCriteriaData, $oItemCriteria->itemcriteria_id);
+        }
+//        return $aExistingItemCriteriaData;
+
+        $aComplexIds = $request->inputAssoItem;
+        foreach ($aExistingItemCriteriaData as $aData => $iValue) {
+            $oPtsItem = new PointsItem;
+            $oPtsItem->name = $aComplexIds[$aData];
+            $oPtsItem->task_id = $request->inputProject;
+            $oPtsItem->itemcriteria_id = $iValue;
+            $oPtsItem->save();
+        }
+
+
     }
 }

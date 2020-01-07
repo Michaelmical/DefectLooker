@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Complex;
 use Illuminate\Http\Request;
 
 class ComplexController extends Controller
@@ -40,12 +41,12 @@ class ComplexController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
+        return response()->json(Complex::where('areatype_id', $id)->get());
     }
 
     /**

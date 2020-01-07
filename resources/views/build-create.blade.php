@@ -50,20 +50,20 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="inputSP">Service Pack</label>
-                                            <input type="text" class="form-control" name="inputSP" placeholder="Enter SP..">
+                                            <label for="inputSP">Major #</label>
+                                            <input type="number" class="form-control" name="inputSP" placeholder="Enter SP..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="inputVS">Version</label>
-                                            <input type="text" class="form-control" name="inputVS" placeholder="Enter Version..">
+                                            <label for="inputVS">Minor #</label>
+                                            <input type="number" class="form-control" name="inputVS" placeholder="Enter Version..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="inputDrop">Drop</label>
-                                            <input type="text" class="form-control" name="inputDrop" placeholder="Enter Drop..">
+                                            <label for="inputDrop">Drop #</label>
+                                            <input type="number" class="form-control" name="inputDrop" placeholder="Enter Drop..">
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputDescr">Description</label>
-                                            <input type="text" class="form-control" name="inputDescr" placeholder="Enter Description..">
+                                            <input type="text" class="form-control" name="inputDescr" placeholder="e.g (PROJECT#.#DROP#)">
                                         </div>
                                     </div>
                                 </div>

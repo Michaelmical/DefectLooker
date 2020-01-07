@@ -58,8 +58,8 @@ class BuildController extends Controller
 
         $buildData = new Build;
         $buildData->proj_id  = $request->inputProject;
-        $buildData->sp_id  = $request->inputSP;
-        $buildData->version_id  = $request->inputVS;
+        $buildData->major_id  = $request->inputSP;
+        $buildData->minor_id  = $request->inputVS;
         $buildData->drop_id  = $request->inputDrop;
         $buildData->descr  = $request->inputDescr;
 
@@ -114,8 +114,8 @@ class BuildController extends Controller
         $build = Build::find($id);
 
         $build->proj_id  = $request->inputProject;
-        $build->sp_id  = $request->inputSP;
-        $build->version_id  = $request->inputVS;
+        $build->major_id  = $request->inputSP;
+        $build->minor_id  = $request->inputVS;
         $build->drop_id  = $request->inputDrop;
         $build->descr  = $request->inputDescr;
 

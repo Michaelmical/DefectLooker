@@ -46,7 +46,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Task ID</label>
-                                        <input type="text" class="form-control" placeholder="e.g (RID-000001)" id="txtTaskId">
+                                        <input type="text" class="form-control" placeholder="e.g (ENH#####, TSK######, BUG#####)" id="txtTaskId">
                                     </div>
                                 </div>
                             </div>

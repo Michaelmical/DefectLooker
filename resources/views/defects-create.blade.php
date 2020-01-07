@@ -42,8 +42,8 @@
                                             <label>Bug ID #</label>
                                             <select class="form-control select2bs4" style="width: 100%;" name="bugid">
                                                 <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($tasklist as $task)
-                                                    <option value="{{ $task->task_id }}">{{ $task->task_id }}</option>
+                                                @foreach($buglist as $bug)
+                                                    <option value="{{ $bug->task_id }}">{{ $bug->task_id }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

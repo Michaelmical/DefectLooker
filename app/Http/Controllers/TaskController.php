@@ -82,14 +82,7 @@ class TaskController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param Task $task
-     * @param $taskid
-     * @return Factory|\Illuminate\Http\RedirectResponse|View
-     */
-    public function edit(Task $task, $taskid)
+    public function edit($taskid)
     {
         $aTaskData = Task::where('task_id', $taskid)->first();
 
@@ -103,14 +96,14 @@ class TaskController extends Controller
         }
 
         $aIncType = [
-            ['types' => 'bug'], ['types' => 'task'], ['types' => 'enhancement']
+            ['types' => 'BUG'], ['types' => 'TASK'], ['types' => 'ENHANCEMENT']
         ];
         foreach ($aIncType as $aDataItem => $svalue) {
             $aIncType[$aDataItem]['active'] = ($svalue['types'] === $aTaskData['inc_type']) ? 'active' : '';
         }
 
         $aSeverity = [
-            ['type' => 'low'], ['type' => 'medium'], ['type' => 'high']
+            ['type' => 'LOW'], ['type' => 'MEDIUM'], ['type' => 'HIGH']
         ];
         foreach ($aSeverity as $aDataItem => $svalue) {
             $aSeverity[$aDataItem]['active'] = ($svalue['type'] === $aTaskData['severity']) ? 'active' : '';

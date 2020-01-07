@@ -55,20 +55,20 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="inputSP">Service Pack</label>
-                                            <input type="text" class="form-control" name="inputSP" placeholder="Enter SP.." value="{{$build->sp_id}}">
+                                            <label for="inputSP">Major #</label>
+                                            <input type="number" class="form-control" name="inputSP" placeholder="Enter SP.." value="{{$build->major_id}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="inputVS">Version</label>
-                                            <input type="text" class="form-control" name="inputVS" placeholder="Enter Version.." value="{{$build->version_id}}">
+                                            <label for="inputVS">Minor #</label>
+                                            <input type="number" class="form-control" name="inputVS" placeholder="Enter Version.." value="{{$build->minor_id}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label for="inputDrop">Drop</label>
-                                            <input type="text" class="form-control" name="inputDrop" placeholder="Enter Drop.." value="{{$build->drop_id}}">
+                                            <label for="inputDrop">Drop #</label>
+                                            <input type="number" class="form-control" name="inputDrop" placeholder="Enter Drop.." value="{{$build->drop_id}}">
                                         </div>
                                     </div>
                                 </div>

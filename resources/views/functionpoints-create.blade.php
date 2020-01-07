@@ -35,7 +35,7 @@
                         <form id="buildadd" method="POST" action="{{ route('functionpoints-store') }}">
                             @csrf
                             <div class="card-body">
-                                <div class="row mb-n3">
+                                <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Task</label>
@@ -49,8 +49,8 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div id="itemshere">
-                                    <div class="row mb-n3" id="template">
+                                <div id="itemshere" class="mb-n4">
+                                    <div class="row" id="template">
                                         <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Area</label>
@@ -66,6 +66,7 @@
                                             <div class="form-group">
                                                 <label>Area Type</label>
                                                 <select class="form-control btnAreaType" disabled required style="width: 100%;" name="inputAreaType[]">
+                                                    <option></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -73,6 +74,7 @@
                                             <div class="form-group">
                                                 <label>Complexity</label>
                                                 <select class="form-control" disabled required style="width: 100%;" name="inputComplex[]">
+                                                    <option></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -92,7 +94,8 @@
                                         <hr>
                                     </div>
                                 </div>
-                                <hr>
+                            </div>
+                            <div class="card-footer mb-n3">
                                 <button type="submit" class="btn btn-primary" id="btn-submit">Add Points</button>
                             </div>
                         </form>
@@ -122,10 +125,15 @@
             $(this).parent().parent().parent().remove();
         });
         $('body').on('click', '.btnAdd', function () {
-            var asd = $('#template').clone();
-            asd.find('input[name="inputAssoItem[]"]').val('')
-            $('#itemshere').prepend(asd);
+            var oFuncPtsList = $('#template').clone();
+            oFuncPtsList.find('input[name="inputAssoItem[]"]').val('');
+            oFuncPtsList.find('select[name="inputAreaType[]"]').empty();
+            oFuncPtsList.find('select[name="inputAreaType[]"]').prop('disabled', true);
+            oFuncPtsList.find('select[name="inputComplex[]"]').empty();
+            oFuncPtsList.find('select[name="inputComplex[]"]').prop('disabled', true);
+            $('#itemshere').append(oFuncPtsList);
         });
+
         $('body').on('change', '.btnArea', function () {
             // alert($(this).val());
             var oThis = $(this);
@@ -147,23 +155,26 @@
                 }
             })
         });
+
         $('body').on('change', '.btnAreaType', function () {
-            alert($(this).val());
-            // var oThis = $(this);
-            // oThis.parent().parent().next().find('select').removeAttr('disabled');
-            //
-            // $.ajax({
-            //     url : '/complexity/' + oThis.val(),
-            //     method : 'GET',
-            //     success : function (data) {
-            //         oThis.parent().parent().next().find('select').empty();
-            //         $.each(data, function (index, value) {
-            //             oThis.parent().parent().next().find('select').append(
-            //                 '<option value="'+ value.areatype_id +'">'+value.descr+'</option>'
-            //             );
-            //         });
-            //     }
-            // });
+            var oThis = $(this);
+            oThis.parent().parent().next().find('select').removeAttr('disabled');
+
+            $.ajax({
+                url : '/complex/' + oThis.val(),
+                method : 'GET',
+                success : function (data) {
+                    oThis.parent().parent().next().find('select').empty();
+                    oThis.parent().parent().next().find('select').append(
+                        '<option></option>'
+                    );
+                    $.each(data, function (index, value) {
+                        oThis.parent().parent().next().find('select').append(
+                            '<option value="'+ value.complex_id +'">' + value.descr.toUpperCase() + ' - ' + value.weight.toUpperCase() + ' - ' + value.criteria + '</option>'
+                        );
+                    });
+                }
+            });
         });
     </script>
 @endpush

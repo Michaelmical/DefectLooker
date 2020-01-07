@@ -17,17 +17,17 @@ class DefectsController extends Controller
     {
         //
 
-        $defects = DB::table('defects')->get();
-        $defectTypes = DB::table('defect_type')->get();
-        $defectCauses = DB::table('defect_cause')->get();
-
-        return view('defects',
-            [
-                'defectslist' => $defects,
-                'defecttypelist' => $defectTypes,
-                'defectcauselist' => $defectCauses
-            ]
-        );
+//        $defects = DB::table('defects')->where('inc_type','BUG')->get();
+//        $defectTypes = DB::table('defect_type')->get();
+//        $defectCauses = DB::table('defect_cause')->get();
+//
+//        return view('defects',
+//            [
+//                'defectslist' => $defects,
+//                'defecttypelist' => $defectTypes,
+//                'defectcauselist' => $defectCauses
+//            ]
+//        );
 
     }
 
@@ -35,12 +35,14 @@ class DefectsController extends Controller
     {
         //
 
+        $bugData = DB::table('task')->where('inc_type','BUG')->get();
         $taskData = DB::table('task')->get();
         $defectTypes = DB::table('defect_type')->get();
         $defectCauses = DB::table('defect_cause')->get();
 
         return view('defects-create',
             [
+                'buglist' => $bugData,
                 'tasklist' => $taskData,
                 'defecttypelist' => $defectTypes,
                 'defectcauselist' => $defectCauses
@@ -72,7 +74,7 @@ class DefectsController extends Controller
         $buildData->orig_ref_id  = $request->origrefno;
         $buildData->defect_type_id  = $request->defecttype;
         $buildData->defect_cause_id  = $request->defectcause;
-        $buildData->area_category  = $request->remarks;
+        $buildData->area_category  = $request->areacategory;
         $buildData->remarks  = $request->remarks;
 
         $buildData->save();
