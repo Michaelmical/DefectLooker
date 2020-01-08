@@ -10,74 +10,43 @@
 
 @section('content')
     <section class="content">
-        <div class="modal fade" id="modal-danger">
-            <div class="modal-dialog">
-                <div class="modal-content bg-danger">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Confirmation</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete this record?</p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-light" data-dismiss="modal" id="btnCloseModal">Cancel</button>
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-outline-light" id="deleteRecord">Delete</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
+
 
         <div class="row">
             <div class="col-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">BUILDS</h3>
+                        <h3 class="card-title">List of Task with Defects</h3>
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Build Description</th>
-                                <th>Actions</th>
+                                <th>Task ID</th>
+                                <th>Description</th>
+                                <th>Total # of Defects</th>
+                                <th>Allowable Defects</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($builds as $build)
+                            @foreach($tasks as $task)
                                 <tr>
-                                    <td>{{$build->proj_name}}</td>
-                                    <td>{{$build->descr}}</td>
-                                    <td>
-                                        <a class="btn btn-warning" href="{{route('build.edit',['id'=>$build->build_id])}}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger deleteBuild" data-toggle="modal" data-target="#modal-danger" id="{{$build->build_id}}">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
-                                    </td>
+                                    <td>{{$task->taskid}}</td>
+                                    <td>{{$task->descr}}</td>
+                                    <td>{{$task->points}}</td>
+                                    <td>{{$task->allowable}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th>Project Name</th>
-                                <th>Build Description</th>
-                                <th>Actions</th>
+                                <th>Task ID</th>
+                                <th>Description</th>
+                                <th>Total # of Defects</th>
+                                <th>Allowable Defects</th>
                             </tr>
                             </tfoot>
                         </table>
-                    </div>
-                    <div class="card-footer">
-                        <a class="btn btn-success" href="{{route('build-create')}}">
-                            <i class="fas fa-plus-square"></i> Add Build
-                        </a>
                     </div>
                 </div>
             </div>

@@ -17,25 +17,44 @@ class DefectsController extends Controller
     {
         //
 
-//        $defects = DB::table('defects')->where('inc_type','BUG')->get();
-//        $defectTypes = DB::table('defect_type')->get();
-//        $defectCauses = DB::table('defect_cause')->get();
-//
-//        return view('defects',
-//            [
-//                'defectslist' => $defects,
-//                'defecttypelist' => $defectTypes,
-//                'defectcauselist' => $defectCauses
-//            ]
-//        );
+        $query = DB::table('task')
+            ->join('defects', 'task.task_id', '=', 'defects.orig_ref_id')
+            ->groupBy('task.task_id')->selectRaw('task.task_id as taskid, task.name as descr, COUNT(*) as points, 1 as allowable')
+            ->get();
+
+        foreach ($query as $task)
+        {
+            $query2 = DB::table('task')
+                ->join('pointsitem', 'pointsitem.task_id', '=', 'task.task_id')
+                ->join('itemcriteria', 'pointsitem.itemcriteria_id', '=', 'itemcriteria.itemcriteria_id')
+                ->join('complex', 'itemcriteria.complex_id', '=', 'complex.complex_id')
+                ->where('task.task_id','=',$task->taskid)
+                ->groupBy('task.task_id')->selectRaw('SUM(complex.weight) * .1 as points')
+                ->get();
+
+            foreach ($query2 as $points)
+            {
+                $task->allowable = $points->points;
+            }
+
+        }
+
+        return  view('defects',
+            ['tasks' => $query]
+        );
 
     }
 
     public function create()
     {
         //
-
-        $bugData = DB::table('task')->where('inc_type','BUG')->get();
+        $defectedItems = array();
+        $defects = DB::table('defects')->get();
+        foreach ($defects as $defect) {
+            $defectedItems[] = $defect->task_id;
+        }
+        //return $defects;
+        $bugData = DB::table('task')->where('inc_type','BUG')->whereNotIn('task_id',$defectedItems)->get();
         $taskData = DB::table('task')->get();
         $defectTypes = DB::table('defect_type')->get();
         $defectCauses = DB::table('defect_cause')->get();
@@ -48,6 +67,8 @@ class DefectsController extends Controller
                 'defectcauselist' => $defectCauses
             ]
         );
+
+        return redirect()->route('defects');
 
     }
 

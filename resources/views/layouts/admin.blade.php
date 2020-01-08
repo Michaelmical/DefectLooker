@@ -71,7 +71,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{  route('build') }}" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}">
-                                    <i class="fas fa-check-circle nav-icon"></i>
+                                    <i class="fab fa-simplybuilt nav-icon"></i>
                                     <p>Build</p>
                                 </a>
                             </li>
@@ -88,13 +88,13 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{  route('tasks') }}" class="nav-link {{ (Route::is('tasks')) ? 'active' : '' }}">
-                                    <i class="fas fa-book nav-icon"></i>
+                                    <i class="fas fa-list-ol nav-icon"></i>
                                     <p>List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{  route('tasks-create') }}" class="nav-link {{ (Route::is('tasks-create')) ? 'active' : '' }}">
-                                    <i class="far fa-plus-square nav-icon"></i>
+                                    <i class="far fa-calendar-plus nav-icon"></i>
                                     <p>Create</p>
                                 </a>
                             </li>
@@ -134,20 +134,20 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{  route('functionpoints') }}" class="nav-link {{ (Route::is('functionpoints')) ? 'active' : '' }}">
-                                    <i class="fas fa-book nav-icon"></i>
+                                    <i class="fas fa-list-ol nav-icon"></i>
                                     <p>List</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="{{  route('functionpoints-create') }}" class="nav-link {{ (Route::is('functionpoints-create')) ? 'active' : '' }}">
-                                    <i class="far fa-plus-square nav-icon"></i>
+                                    <i class="far fa-calendar-plus nav-icon"></i>
                                     <p>Create</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview ">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item has-treeview {{ (Route::is(['defects', 'defects-create'])) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ (Route::is(['defects', 'defects-create'])) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
                                 Defects
@@ -156,8 +156,14 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{route('defects-create')}}" class="nav-link">
-                                    <i class="far fa-plus-square nav-icon"></i>
+                                <a href="{{  route('defects') }}" class="nav-link {{ (Route::is('defects')) ? 'active' : '' }}">
+                                    <i class="fas fa-list-ol nav-icon"></i>
+                                    <p>List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('defects-create')}}" class="nav-link {{ (Route::is('defects-create')) ? 'active' : '' }}">
+                                    <i class="far fa-calendar-plus nav-icon"></i>
                                     <p>Create</p>
                                 </a>
                             </li>

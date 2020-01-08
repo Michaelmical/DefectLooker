@@ -61,6 +61,6 @@ class FunctionPointsController extends Controller
             $oPtsItem->save();
         }
 
-
+        return redirect()->route('functionpoints');
     }
 }
