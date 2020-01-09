@@ -48,6 +48,11 @@
                             </tfoot>
                         </table>
                     </div>
+                    <div class="card-footer">
+                        <a class="btn btn-success" href="{{route('employee-create')}}">
+                            <i class="fas fa-plus-square"></i> Add Employee
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

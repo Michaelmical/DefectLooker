@@ -34,9 +34,9 @@
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <a href="#" class="brand-link">
-            <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="Defect LOOKER Logo" class="brand-image img-circle elevation-3"
+            <img src="{{ asset('dist/img/buglogo.jpg') }}" alt="Defect LOOKER Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
-            <span class="brand-text font-weight-light">Defect LOOKER</span>
+            <span class="brand-text font-weight-light">Defect Looker</span>
         </a>
 
         <div class="sidebar">
@@ -72,7 +72,19 @@
                             <li class="nav-item">
                                 <a href="{{  route('build') }}" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}">
                                     <i class="fab fa-simplybuilt nav-icon"></i>
-                                    <p>Build</p>
+                                    <p>Builds</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{  route('project') }}" class="nav-link {{ (Route::is('project')) ? 'active' : '' }}">
+                                    <i class="fab fa-product-hunt nav-icon"></i>
+                                    <p>Projects</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{  route('employee') }}" class="nav-link {{ (Route::is('employee')) ? 'active' : '' }}">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>Employees</p>
                                 </a>
                             </li>
                         </ul>
@@ -100,29 +112,29 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>
-                                Employee
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{  route('employee') }}" class="nav-link">
-                                    <i class="fas fa-book nav-icon"></i>
-                                    <p>List</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{  route('employee-create') }}" class="nav-link">
-                                    <i class="far fa-plus-square nav-icon"></i>
-                                    <p>Create</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+{{--                    <li class="nav-item has-treeview">--}}
+{{--                        <a href="#" class="nav-link">--}}
+{{--                            <i class="nav-icon fas fa-user"></i>--}}
+{{--                            <p>--}}
+{{--                                Employee--}}
+{{--                                <i class="fas fa-angle-left right"></i>--}}
+{{--                            </p>--}}
+{{--                        </a>--}}
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{  route('employee') }}" class="nav-link">--}}
+{{--                                    <i class="fas fa-book nav-icon"></i>--}}
+{{--                                    <p>List</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{  route('employee-create') }}" class="nav-link">--}}
+{{--                                    <i class="far fa-plus-square nav-icon"></i>--}}
+{{--                                    <p>Create</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
                     <li class="nav-item has-treeview {{ (Route::is(['functionpoints', 'functionpoints-create'])) ? 'menu-open' : '' }}">
                         <a href="#" class="nav-link {{ (Route::is(['functionpoints', 'functionpoints-create'])) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-table"></i>
