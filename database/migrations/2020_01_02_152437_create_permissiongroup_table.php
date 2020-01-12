@@ -15,14 +15,11 @@ class CreatePermissiongroupTable extends Migration
     {
         Schema::create('permissiongroup', function (Blueprint $table) {
             $table->smallIncrements('grp_id');
-            $table->enum('type', ['SUPERADMIN', 'ADMIN', 'USER']);
+            $table->enum('type', ['ADMIN', 'USER']);
             $table->timestamps();
         });
 
         $data = array(
-            array(
-                'type'     => 'SUPERADMIN',
-            ),
             array(
                 'type'     => 'ADMIN',
             ),

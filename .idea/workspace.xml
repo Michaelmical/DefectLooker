@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a8bfbe77-64cd-4c6d-8011-1d218374a011" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_02_152437_create_permissiongroup_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_02_152437_create_permissiongroup_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,6 +174,7 @@
       <workItem from="1578112674035" duration="37547000" />
       <workItem from="1578180622557" duration="11590000" />
       <workItem from="1578198315742" duration="20788000" />
+      <workItem from="1578791199045" duration="2173000" />
     </task>
     <servers />
   </component>
@@ -195,6 +200,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1578182699816" />
+    <state x="379" y="0" width="607" height="728" key="find.popup" timestamp="1578791994932">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="379" y="0" width="607" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1578791994932" />
     <state width="600" height="424" key="javadoc.popup" timestamp="1578155448602">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
