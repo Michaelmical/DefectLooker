@@ -15,13 +15,18 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Factory|\Illuminate\View\View\
      */
     public function index()
     {
-        return view('tasks', ['aTaskData' => DB::table('task')
-            ->join('build','task.build_id','=', 'build.build_id')
-            ->join('employee', 'task.emp_id', '=', 'employee.emp_id')->get()]);
+        $aData = (session('grpid') === 2) ?
+            DB::table('task')
+                ->join('build','task.build_id','=', 'build.build_id')
+                ->join('employee', 'task.emp_id', '=', 'employee.emp_id')
+                ->where('task.emp_id', '=', session('empid'))->get()
+            : DB::table('task')
+                ->join('build','task.build_id','=', 'build.build_id')
+                ->join('employee', 'task.emp_id', '=', 'employee.emp_id')->get();
+        return view('tasks', ['aTaskData' => $aData]);
     }
 
     /**

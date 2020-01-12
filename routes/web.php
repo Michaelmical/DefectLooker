@@ -10,18 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'AuthController@index')->name('login');
-Route::post('/postLogin', 'AuthController@postLogin')->name('login.postLogin');
-Route::get('/registration', 'AuthController@registration');
+Route::get('/',                  'AuthController@index')->middleware('check.login.page')->name('login');
+Route::post('/postLogin',        'AuthController@postLogin')->name('login.postLogin');
+Route::get('/registration',      'AuthController@registration');
 Route::post('post-registration', 'AuthController@postRegistration');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/logout', 'AuthController@logout');
+Route::get('/logout',            'AuthController@logout');
 
-Route::get('/tasks',               'TaskController@index')->name('tasks');
+Route::get('/dashboard',         'DashboardController@index')->name('dashboard');
+
+Route::get('/tasks',               'TaskController@index')->middleware('check.exist.session')->name('tasks');
 Route::get('/tasks/create',        'TaskController@create')->name('tasks-create');
 Route::post('/tasks',              'TaskController@store')->name('tasks-store');
-Route::get('/tasks/{taskid}/edit', 'TaskController@edit')->name('tasks-edit'); // view & data retrieve
-Route::put('/tasks/{taskid}',      'TaskController@update')->name('tasks-update'); // func
+Route::get('/tasks/{taskid}/edit', 'TaskController@edit')->name('tasks-edit');
+Route::put('/tasks/{taskid}',      'TaskController@update')->name('tasks-update');
 Route::delete('/tasks/{taskid}',   'TaskController@destroy')->name('tasks->delete');
 
 Route::get('employee', 'EmployeeController@index')->name('employee');
@@ -52,6 +53,11 @@ Route::get('complex/{id}',      'ComplexController@show')->name('complex-show');
 Route::get('defects', 'DefectsController@index')->name('defects');
 Route::get('defects/create', 'DefectsController@create')->name('defects-create');
 Route::post('defects', 'DefectsController@store')->name('defects.store');
+
+Route::get('session', function () {
+    return response()->json(session()->all());
+//    session()->flush();
+});
 
 //Route::get('/resourceName',                 'ControllerName@index');
 //Route::get('/resourceName/{resource}',      'ControllerName@show');
