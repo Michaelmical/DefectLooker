@@ -47,22 +47,14 @@ class DefectsController extends Controller
 
     public function create()
     {
-        //
-        $defectedItems = array();
-        $defects = DB::table('defects')->get();
-        foreach ($defects as $defect) {
-            $defectedItems[] = $defect->task_id;
-        }
-        //return $defects;
-        $bugData = DB::table('task')->where('inc_type','BUG')->whereNotIn('task_id',$defectedItems)->get();
-        $taskData = DB::table('task')->get();
+
         $defectTypes = DB::table('defect_type')->get();
         $defectCauses = DB::table('defect_cause')->get();
+        $projects = DB::table('project')->get();
 
         return view('defects-create',
             [
-                'buglist' => $bugData,
-                'tasklist' => $taskData,
+                'projectlist' => $projects,
                 'defecttypelist' => $defectTypes,
                 'defectcauselist' => $defectCauses
             ]
@@ -82,25 +74,26 @@ class DefectsController extends Controller
     {
 
         $validatedData = $request->validate([
-            'bugid' => 'required',
-            'origrefno' => 'required',
-            'defecttype' => 'required',
-            'defectcause' => 'required',
-            'areacategory' => 'required',
-            'remarks' => 'required',
+            'inputProjectId' =>'required',
+            'inputBuildId' => 'required',
+            'inputOrigRefNo' => 'required',
+            'inputDefectType' => 'required',
+            'inputDefectCause' => 'required',
+            'inputAreaCategory' => 'required',
+            'inputRemarks' => 'required',
         ]);
 
         $buildData = new Defects;
-        $buildData->task_id  = $request->bugid;
-        $buildData->orig_ref_id  = $request->origrefno;
-        $buildData->defect_type_id  = $request->defecttype;
-        $buildData->defect_cause_id  = $request->defectcause;
-        $buildData->area_category  = $request->areacategory;
-        $buildData->remarks  = $request->remarks;
+        $buildData->task_id  = $request->inputBuildId;
+        $buildData->orig_ref_id  = $request->inputOrigRefNo;
+        $buildData->defect_type_id  = $request->inputDefectType;
+        $buildData->defect_cause_id  = $request->inputDefectCause;
+        $buildData->area_category  = $request->inputAreaCategory;
+        $buildData->remarks  = $request->inputRemarks;
 
         $buildData->save();
 
-        return redirect()->route('build');
+        return redirect()->route('defects');
     }
 
     /**
@@ -147,4 +140,51 @@ class DefectsController extends Controller
     {
         //
     }
+
+    public function build($id)
+    {
+
+        $data = DB::table('project')
+            ->join('build', 'project.proj_id', '=', 'build.proj_id')
+            ->join('task', 'build.build_id', '=', 'task.build_id')
+            ->where('task.inc_type','=','BUG')
+            ->where('project.proj_id','=',$id)
+            ->whereNotIn('task.task_id',
+                function ($query){
+                    $query->select('defects.task_id')->from('defects');
+                })
+            ->groupBy('task.task_id')->selectRaw('task.task_id as taskid, task.name as descr')
+            ->get();
+
+        return response()->json($data);
+    }
+
+    public function original($id)
+    {
+
+        $data = DB::table('project')
+            ->join('build', 'project.proj_id', '=', 'build.proj_id')
+            ->join('task', 'build.build_id', '=', 'task.build_id')
+            //->where('task.inc_type','!=','BUG')
+            ->where('task.task_id','=',$id)
+            ->groupBy('task.task_id')->selectRaw('task.task_id as taskid, build.build_id as buildid, project.proj_id as projid')
+            ->first();
+
+        $projID = $data->projid;
+        $buildID = $data->buildid;
+
+        $query = DB::table('project')
+            ->join('build', 'project.proj_id', '=', 'build.proj_id')
+            ->join('task', 'build.build_id', '=', 'task.build_id')
+            ->where('build.build_id','!=',$buildID)
+            ->where('project.proj_id','=',$projID)
+            ->groupBy('task.task_id')
+            ->selectRaw('task.task_id as taskid, build.build_id as buildid, project.proj_id as projid')
+            ->get();
+
+        return response()->json($query);
+    }
+
+
+
 }

@@ -10,6 +10,23 @@
 @endpush
 
 @section('content')
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Build</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('build')}}">Build</a></li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -83,7 +100,7 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary" id="btn-submit">Update Build</button>
+                                <button type="submit" class="btn btn-success" id="btn-submit">Update Build</button>
                             </div>
                         </form>
                     </div>

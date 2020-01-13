@@ -14,12 +14,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Builds</h1>
+                    <h1>Projects</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Build</li>
+                        <li class="breadcrumb-item active">Project</li>
                     </ol>
                 </div>
             </div>
@@ -53,30 +53,30 @@
     <section class="content">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">List of Build</h3>
+                <h3 class="card-title">List of Project</h3>
             </div>
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Project Name</th>
-                        <th>Build Description</th>
+                        <th>Project ID</th>
+                        <th>Description</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($builds as $build)
+                    @foreach($projects as $project)
                         <tr>
-                            <td>{{$build->proj_name}}</td>
-                            <td>{{$build->descr}}</td>
+                            <td>{{$project->proj_id}}</td>
+                            <td>{{$project->proj_name}}</td>
                             <td>
-                                <a class="btn btn-info btn-sm" href="{{route('build-show',['id'=>$build->build_id])}}">
+                                <a class="btn btn-info btn-sm" href="{{route('project-show',['id'=>$project->proj_id])}}">
                                     <i class="fas fa-eye"></i> View
                                 </a>
-                                <a class="btn btn-warning btn-sm" href="{{route('build-edit',['id'=>$build->build_id])}}">
+                                <a class="btn btn-warning btn-sm" href="{{route('project-edit',['id'=>$project->proj_id])}}">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a class="btn btn-danger btn-sm deleteBuild" data-toggle="modal" data-target="#modal-danger" id="{{$build->build_id}}">
+                                <a class="btn btn-danger btn-sm deleteBuild" data-toggle="modal" data-target="#modal-danger" id="{{$project->proj_id}}">
                                     <i class="fas fa-trash"></i> Delete
                                 </a>
                             </td>
@@ -85,16 +85,16 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>Project Name</th>
-                        <th>Build Description</th>
+                        <th>Project ID</th>
+                        <th>Description</th>
                         <th>Actions</th>
                     </tr>
                     </tfoot>
                 </table>
             </div>
             <div class="card-footer">
-                <a class="btn btn-success" href="{{route('build-create')}}">
-                 Add Build
+                <a class="btn btn-success" href="{{route('project-create')}}">
+                   Add Project
                 </a>
             </div>
         </div>
@@ -130,7 +130,7 @@
         $('#deleteRecord').click(function () {
             $.ajax({
                 type: "DELETE",
-                url: '/build/' + $('#deleteRecord').attr('data-id'),
+                url: '/project/' + $('#deleteRecord').attr('data-id'),
                 beforeSend:function(){
                     $('#deleteRecord').text('Deleting...');
                 },

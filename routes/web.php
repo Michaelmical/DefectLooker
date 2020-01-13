@@ -30,14 +30,19 @@ Route::get('employee/create', 'EmployeeController@create')->name('employee-creat
 
 Route::get('build', 'BuildController@index')->name('build');
 Route::get('build/create', 'BuildController@create')->name('build-create');
-Route::get('build/{id}/edit', 'BuildController@edit')->name('build.edit');
+Route::get('build/{id}', 'BuildController@show')->name('build-show');
+Route::get('build/{id}/edit', 'BuildController@edit')->name('build-edit');
 Route::post('build', 'BuildController@store')->name('build.store');
 Route::put('build/{id}',      'BuildController@update')->name('build.update');
 Route::delete('build/{id}',   'BuildController@destroy')->name('build.delete');
 
 Route::get('project', 'ProjectController@index')->name('project');
 Route::get('project/create', 'ProjectController@create')->name('project-create');
+Route::get('project/{id}', 'ProjectController@show')->name('project-show');
+Route::get('project/{id}/edit', 'ProjectController@edit')->name('project-edit');
 Route::post('project', 'ProjectController@store')->name('project.store');
+Route::put('project/{id}',      'ProjectController@update')->name('project.update');
+Route::delete('project/{id}',   'ProjectController@destroy')->name('project.delete');
 
 Route::get('functionpoints',        'FunctionPointsController@index')->name('functionpoints');
 Route::get('functionpoints/create', 'FunctionPointsController@create')->name('functionpoints-create');
@@ -51,6 +56,8 @@ Route::get('complex/{id}',      'ComplexController@show')->name('complex-show');
 
 Route::get('defects', 'DefectsController@index')->name('defects');
 Route::get('defects/create', 'DefectsController@create')->name('defects-create');
+Route::get('defects/{id}/build', 'DefectsController@build')->name('defects.build');
+Route::get('defects/{id}/original', 'DefectsController@original')->name('defects.original');
 Route::post('defects', 'DefectsController@store')->name('defects.store');
 
 //Route::get('/resourceName',                 'ControllerName@index');

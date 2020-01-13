@@ -60,8 +60,8 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview {{ (Route::is('build')) ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}">
+                    <li class="nav-item has-treeview {{ (Route::is('build')) ? 'menu-open' : '' }}{{ (Route::is('project')) ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}{{ (Route::is('project')) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>
                                 Setup

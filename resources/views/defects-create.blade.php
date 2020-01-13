@@ -10,6 +10,23 @@
 @endpush
 
 @section('content')
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Defects</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('defects')}}">Defects</a></li>
+                        <li class="breadcrumb-item active">Create</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -21,7 +38,6 @@
                             <h3 class="card-title">Defects Details</h3>
                         </div>
                         <!-- /.card-header -->
-
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <strong>Whoops!</strong> There were some problems with your input.
@@ -37,32 +53,37 @@
                             @csrf
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Project</label>
+                                            <select class="form-control select2bs4 btnProjectId" style="width: 100%;" name="inputProjectId">
+                                                <option></option>
+                                                @foreach($projectlist as $project)
+                                                    <option value="{{ $project->proj_id }}">{{ $project->proj_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Bug ID #</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="bugid">
-                                                <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($buglist as $bug)
-                                                    <option value="{{ $bug->task_id }}">{{ $bug->task_id }}</option>
-                                                @endforeach
+                                            <select class="form-control select2bs4 btnBuildId" disabled style="width: 100%;" name="inputBuildId">
+                                                <option></option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Orig Ref #</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="origrefno">
-                                                <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($tasklist as $task)
-                                                    <option value="{{ $task->task_id }}">{{ $task->task_id }}</option>
-                                                @endforeach
+                                            <select class="form-control select2bs4 btnOrigRefNo" disabled required style="width: 100%;" name="inputOrigRefNo">
+                                                <option></option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Defect Type</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="defecttype">
+                                            <select class="form-control select2bs4 btnDefectType" style="width: 100%;" name="inputDefectType">
                                                 <option selected="selected" disabled="disabled" value="null"></option>
                                                 @foreach($defecttypelist as $defecttype)
                                                     <option value="{{ $defecttype->defect_type_id }}">{{ $defecttype->desc_type }}</option>
@@ -75,7 +96,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label>Defect Cause</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="defectcause">
+                                            <select class="form-control select2bs4 btnDefectCause" style="width: 100%;" name="inputDefectCause">
                                                 <option selected="selected" disabled="disabled" value="null"></option>
                                                 @foreach($defectcauselist as $defectcause)
                                                     <option value="{{ $defectcause->defect_cause_id}}">{{ $defectcause->desc_cause }}</option>
@@ -85,15 +106,15 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="areacategory">Area/Category found</label>
-                                            <input type="text" class="form-control" name="areacategory" placeholder="Enter Area or Category..">
+                                            <label for="inputAreaCategory">Area/Category found</label>
+                                            <input type="text" class="form-control btnAreaCategory" name="inputAreaCategory" placeholder="Enter Area or Category..">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <!-- textarea -->
                                         <div class="form-group">
                                             <label>Remarks</label>
-                                            <textarea class="form-control" rows="3" placeholder="Enter ..." name="remarks"></textarea>
+                                            <textarea class="form-control btnRemarks" rows="3" placeholder="Enter ..." name="inputRemarks"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -123,16 +144,56 @@
     <script src="{{asset('plugins/moment/moment.min.js')}}"></script>
     <script src="{{asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js')}}"></script>
     <script>
+
         $('.select2').select2();
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         });
-        //Datemask yyyy/mm/dd
-        $('#datemask').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
-        //Datemask2 yyyy/mm/dd
-        $('#datemask2').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
-        //Money Euro
-        $('[data-mask]').inputmask()
+
+        $('body').on('change', '.btnProjectId', function () {
+            var oThis = $(this);
+            $.ajax({
+                url : '/defects/' + oThis.val() +'/build' ,
+                method : 'GET',
+                success : function (data) {
+                    //console.log(data);
+                    oThis.parent().parent().next().find('select').empty();
+                    oThis.parent().parent().next().find('select').append(
+                        '<option></option>'
+                    );
+                    $.each(data, function (index, value) {
+                        oThis.parent().parent().next().find('select').append(
+                            '<option value="'+ value.taskid +'">'+value.taskid+'</option>'
+                        );
+                    });
+                    oThis.parent().parent().next().find('select').removeAttr('disabled');
+                }
+            })
+        });
+
+        $('body').on('change', '.btnBuildId', function () {
+            //alert($(this).val());
+            var oThis = $(this);
+            $.ajax({
+                url : '/defects/' + oThis.val() +'/original',
+                method : 'GET',
+                success : function (data) {
+                    //console.log(data);
+                    oThis.parent().parent().next().find('select').empty();
+                    oThis.parent().parent().next().find('select').append(
+                        '<option></option>'
+                    );
+                    $.each(data, function (index, value) {
+                        oThis.parent().parent().next().find('select').append(
+                            '<option value="'+ value.taskid +'">'+value.taskid+'</option>'
+                        );
+                    });
+                    oThis.parent().parent().next().find('select').removeAttr('disabled');
+                }
+            })
+        });
+
+
     </script>
 @endpush
 

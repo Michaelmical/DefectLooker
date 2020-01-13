@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Build;
+use http\Env\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
@@ -78,6 +79,19 @@ class BuildController extends Controller
     public function show($id)
     {
         //
+
+        $buildData = DB::table('build')
+            ->join('project', 'build.proj_id', '=', 'project.proj_id')
+            ->select('build.*', 'project.proj_name')
+            ->where('build.build_id',$id)
+            ->first();
+
+        return view('build-show',
+            [
+                'build' => $buildData
+
+            ]);
+
     }
 
     public function edit($id)
@@ -89,6 +103,8 @@ class BuildController extends Controller
             ->select('build.*', 'project.proj_name')
             ->where('build.build_id',$id)
             ->first();
+
+//        return response()->json($buildData);
 
         $projectData = DB::table('project')->get();
 

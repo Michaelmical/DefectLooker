@@ -21,7 +21,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{route('build')}}">Build</a></li>
-                        <li class="breadcrumb-item active">Create</li>
+                        <li class="breadcrumb-item active">View</li>
                     </ol>
                 </div>
             </div>
@@ -50,37 +50,36 @@
                             </div>
                         @endif
                         <!-- form start -->
-                        <form id="buildadd" method="POST" action="{{route('build.store')}}">
+                        <form id="buildupdate" method="POST" action="{{route('build.update',['id'=>$build->build_id])}}">
+                            @method('PUT')
                             @csrf
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Projects</label>
-                                            <select class="form-control select2bs4" style="width: 100%;" name="inputProject">
+                                            <select class="form-control select2bs4" style="width: 100%;" name="inputProject" disabled="disabled">
                                                 <option selected="selected" disabled="disabled" value="null"></option>
-                                                @foreach($projects as $project)
-                                                    <option value="{{ $project->proj_id }}">{{ $project->proj_name }}</option>
-                                                @endforeach
+                                                <option value="{{ $build->proj_id }}" selected="selected">{{ $build->proj_name }}</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputSP">Major #</label>
-                                            <input type="number" class="form-control" name="inputSP" placeholder="Enter SP..">
+                                            <input type="number" class="form-control" disabled="disabled" name="inputSP" placeholder="Enter SP.." value="{{$build->major_id}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputVS">Minor #</label>
-                                            <input type="number" class="form-control" name="inputVS" placeholder="Enter Version..">
+                                            <input type="number" class="form-control" disabled="disabled" name="inputVS" placeholder="Enter Version.." value="{{$build->minor_id}}">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputDrop">Drop #</label>
-                                            <input type="number" class="form-control" name="inputDrop" placeholder="Enter Drop..">
+                                            <input type="number" class="form-control" disabled="disabled" name="inputDrop" placeholder="Enter Drop.." value="{{$build->drop_id}}">
                                         </div>
                                     </div>
                                 </div>
@@ -88,15 +87,12 @@
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputDescr">Description</label>
-                                            <input type="text" class="form-control" name="inputDescr" placeholder="e.g (PROJECT#.#DROP#)">
+                                            <input type="text" class="form-control" name="inputDescr" disabled="disabled" placeholder="Enter Description.." value="{{$build->descr}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-success" id="btn-submit">Add Build</button>
-                            </div>
                         </form>
                     </div>
                     <!-- /.card -->
@@ -112,6 +108,28 @@
         $(document).ready(function () {
             bsCustomFileInput.init();
         });
+        {{--$.ajaxSetup({--}}
+        {{--    headers: {--}}
+        {{--        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+        {{--    }--}}
+        {{--});--}}
+        {{--$('#btn-submit').click(function (e) {--}}
+        {{--    e.preventDefault();--}}
+        {{--    $(this).html('Adding..');--}}
+        {{--    $.ajax({--}}
+        {{--        data: $('#buildadd').serialize(),--}}
+        {{--        url: "{{ route('build.store') }}",--}}
+        {{--        type: "POST",--}}
+        {{--        dataType: 'json',--}}
+        {{--        success: function (data) {--}}
+        {{--            console.log(data);--}}
+        {{--        },--}}
+        {{--        error: function (data) {--}}
+        {{--            console.log('Error:', data);--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--});--}}
+
     </script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
     <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -14,6 +15,11 @@ class ProjectController extends Controller
     public function index()
     {
         //
+        $projects = Project::all();
+
+        return view('project',[
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -24,6 +30,8 @@ class ProjectController extends Controller
     public function create()
     {
         //
+        return view('project-create');
+
     }
 
     /**
@@ -35,6 +43,16 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'inputProjectName' => 'required'
+        ]);
+
+
+        $projectData = new Project;
+        $projectData->proj_name  = $request->inputProjectName;
+        $projectData->save();
+
+        return redirect()->route('project');
     }
 
     /**
@@ -46,6 +64,12 @@ class ProjectController extends Controller
     public function show($id)
     {
         //
+        $project = Project::findorfail($id);
+
+        return view('project-show',
+            [
+                'project' => $project
+            ]);
     }
 
     /**
@@ -57,6 +81,12 @@ class ProjectController extends Controller
     public function edit($id)
     {
         //
+        $project = Project::findorfail($id);
+
+        return view('project-edit',
+        [
+           'project' => $project
+        ]);
     }
 
     /**
@@ -69,6 +99,11 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $build = Project::findorfail($id);
+        $build->proj_name  = $request->inputProjectName;
+        $build->save();
+
+        return redirect()->route('project');
     }
 
     /**
@@ -80,5 +115,11 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         //
+        $data = Project::findorfail($id);
+        $data->delete();
+
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
     }
 }
