@@ -25,7 +25,7 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         //return Hash::make('user1pass');
-        request()->validate([
+        $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
@@ -35,29 +35,18 @@ class AuthController extends Controller
         if ($user && Hash::check($request->password, $user->password)) {
 
             $employee = Employee::where('emp_id', $user['id'])->first();
-
             if (empty($user) === false) {
                 session([
                     'empid' => $user['emp_id'],
-                    'empno' => $user['emp_number'],
                     'grpid' => $user['grp_id'],
-                    'full_name' => $employee['last_name'],
+                    'full_name' => $employee['last_name'] . ', ' . $employee['first_name'],
                     'userImage' => $employee['image_path']
                 ]);
                 session()->save();
             }
-
             return redirect('dashboard');
-
-        }else{
-            return redirect()->route('login');
         }
-
-    }
-
-    public function sessionhere()
-    {
-        return session()->all();
+        return redirect()->route('login');
     }
 
 //    public function postRegistration(Request $request)

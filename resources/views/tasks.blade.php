@@ -21,7 +21,7 @@
                             <thead>
                                 <tr>
                                     <th width="60px;">Task ID</th>
-                                    <th>Assignee</th>
+                                    <th class="{{ session('grpid') == 1 ? '' : 'd-none' }}">Assignee</th>
                                     <th>Description</th>
                                     <th>Build</th>
                                     <th>Incident Type</th>
@@ -35,7 +35,7 @@
                             @foreach($aTaskData as $aData)
                                 <tr data-id="{{ $aData->task_id }}">
                                     <td>{{ $aData->task_id }}</td>
-                                    <td>{{ $aData->last_name }}, {{ $aData->first_name }} {{ $aData->middle_name }}</td>
+                                    <td class="{{ session('grpid') == 1 ? '' : 'd-none' }}">{{ $aData->last_name }}, {{ $aData->first_name }} {{ $aData->middle_name }}</td>
                                     <td>{{ $aData->name }}</td>
                                     <td>{{ $aData->descr }}</td>
                                     <td>{{ ucfirst($aData->inc_type) }}</td>
@@ -56,7 +56,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Task ID</th>
-                                    <th>Assignee</th>
+                                    <th class="{{ session('grpid') == 1 ? '' : 'd-none' }}">Assignee</th>
                                     <th>Description</th>
                                     <th>Build</th>
                                     <th>Incident Type</th>

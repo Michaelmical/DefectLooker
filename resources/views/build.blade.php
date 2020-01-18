@@ -51,10 +51,11 @@
         </div>
     </section>
     <section class="content">
-        <div class="card">
+        <div class="card card-primary card-outline">
             <div class="card-header">
                 <h3 class="card-title">List of Build</h3>
             </div>
+
             <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
@@ -92,6 +93,7 @@
                     </tfoot>
                 </table>
             </div>
+
             <div class="card-footer">
                 <a class="btn btn-success" href="{{route('build-create')}}">
                  Add Build
