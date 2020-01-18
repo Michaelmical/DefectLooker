@@ -14,7 +14,7 @@ Route::get('/',                  'AuthController@index')->middleware('check.logi
 Route::post('/postLogin',        'AuthController@postLogin')->name('login.postLogin');
 Route::get('/registration',      'AuthController@registration');
 Route::post('post-registration', 'AuthController@postRegistration');
-Route::get('/logout',            'AuthController@logout');
+Route::get('/logout',            'AuthController@logout')->name('logout');
 
 Route::get('/dashboard',         'DashboardController@index')->name('dashboard');
 
@@ -45,9 +45,10 @@ Route::post('project', 'ProjectController@store')->name('project.store');
 Route::put('project/{id}',      'ProjectController@update')->name('project.update');
 Route::delete('project/{id}',   'ProjectController@destroy')->name('project.delete');
 
-Route::get('functionpoints',        'FunctionPointsController@index')->name('functionpoints');
-Route::get('functionpoints/create', 'FunctionPointsController@create')->name('functionpoints-create');
-Route::post('functionpoints',       'FunctionPointsController@store')->name('functionpoints-store');
+Route::get('functionpoints',                'FunctionPointsController@index')->name('functionpoints');
+Route::get('functionpoints/create',         'FunctionPointsController@create')->name('functionpoints-create');
+Route::post('functionpoints',               'FunctionPointsController@store')->name('functionpoints-store');
+Route::post('functionpoints/{taskid}/edit', 'FunctionPointsController@edit')->name('functionpoints-edit');
 
 Route::get('areatype/{id}',      'AreaTypeController@show')->name('areatype-show');
 

@@ -16,11 +16,11 @@
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
     @stack('ui')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" style="font-family: 'Rubik', sans-serif;">
 <div class="wrapper">
 
     <nav class="main-header navbar navbar-expand navbar-white navbar-light mb-2">
@@ -46,11 +46,9 @@
                         </a>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="{{ route('logout') }}" class="dropdown-item">
                             <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
                         </a>
-{{--                    <div class="dropdown-divider"></div>--}}
-{{--                    <a href="#" class="dropdown-item dropdown-footer"></a>--}}
                 </div>
             </li>
         </ul>
@@ -74,13 +72,8 @@
                             </p>
                         </a>
                     </li>
-<<<<<<< HEAD
-                    <li class="nav-item has-treeview {{ (Route::is('build')) ? 'menu-open' : '' }}{{ (Route::is('project')) ? 'menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ (Route::is('build')) ? 'active' : '' }}{{ (Route::is('project')) ? 'active' : '' }}">
-=======
                     <li class="nav-item has-treeview {{ (Route::is(['build', 'employee'])) ? 'menu-open' : '' }} {{ (session('grpid') === 1) ? '' : 'd-none' }}">
                         <a href="#" class="nav-link {{ (Route::is(['build', 'employee'])) ? 'active' : '' }}">
->>>>>>> 5c7693d39f0a84d8b5a93494aac5376956c99a90
                             <i class="nav-icon fas fa-cog"></i>
                             <p>
                                 Setup

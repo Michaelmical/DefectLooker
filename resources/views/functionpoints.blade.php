@@ -10,30 +10,6 @@
 
 @section('content')
     <section class="content">
-        <div class="modal fade" id="modal-danger">
-            <div class="modal-dialog">
-                <div class="modal-content bg-danger">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Confirmation</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete this record?</p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-outline-light" data-dismiss="modal" id="btnCloseModal">Cancel</button>
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-outline-light" id="deleteRecord">Delete</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-
         <div class="row">
             <div class="col-12">
                 <div class="card card-primary card-outline">
@@ -46,8 +22,9 @@
                                 <tr>
                                     <th width="100px;">Task No</th>
                                     <th>Task Name</th>
-                                    <th width="100px;">Total Points</th>
-                                    <th width="150px;">Allowable Defects</th>
+                                    <th class="{{ session('grpid') == 1 ? '' : 'd-none' }}">Assignee</th>
+                                    <th >Total Points</th>
+                                    <th >Allowable Defects</th>
                                     <th width="50px;">Action</th>
                                 </tr>
                             </thead>
@@ -56,12 +33,13 @@
                                     <tr>
                                         <td>{{$task->task_id}}</td>
                                         <td>{{$task->name}}</td>
+                                        <td class="{{ session('grpid') == 1 ? '' : 'd-none' }}">{{$task->wholename}}</td>
                                         <td>{{$task->points}}</td>
                                         <td>{{$task->allowable}}</td>
-                                        <td class="text-center">
-                                            <a class="btn btn-info">
+                                        <td class="text-center text-white">
+                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-breakdown" data-id="{{ $task->task_id }}" id="btnBreakDown">
                                                 <i class="fas fa-eye"></i>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -70,6 +48,7 @@
                                 <tr>
                                     <th>Task No</th>
                                     <th>Task Name</th>
+                                    <th class="{{ session('grpid') == 1 ? '' : 'd-none' }}">Assignee</th>
                                     <th>Total Points</th>
                                     <th>Allowable Defects</th>
                                     <th>Action</th>
@@ -77,15 +56,46 @@
                             </tfoot>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <a class="btn btn-success" href="{{route('functionpoints-create')}}">
-                            <i class="fas fa-plus-square"></i>&nbsp; Add Points
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="modal-breakdown">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Associated Items for: <label class="breakdown-title"></label></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                           <th>Area</th>
+                                           <th>Area Type</th>
+                                           <th>Associated Item</th>
+                                           <th>Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="breakdown-data">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('addons')
@@ -131,6 +141,39 @@
                     // console.log('Error:', data);
                 }
             });
+        });
+
+        $('body').on('click', '#btnBreakDown', function () {
+            var sTaskId = $(this).attr('data-id');
+            $.ajax({
+                type: 'POST',
+                url: '/functionpoints/' + sTaskId + '/edit',
+                success: function (data) {
+                    $('.breakdown-title').text(data[0]['task_id']);
+                    $('#breakdown-data').empty();
+                    var iTotal = 0;
+                    $.each(data, function (index, value) {
+                        $('#breakdown-data').append(
+                            '<tr>' +
+                                '<td>' + value.areaname + '</td>' +
+                                '<td>' + value.areatypename + '</td>' +
+                                '<td>' + value.filename + '</td>' +
+                                '<td>' + value.pts + '</td>' +
+                            '</tr>'
+                        );
+                        iTotal += parseFloat(value.pts);
+                    });
+                    $('#breakdown-data').append(
+                        '<tr>' +
+                            '<td colspan="3"></td>' +
+                            '<td>Total: <label class="font-weight-bold h5">' + iTotal + 'pts</label></td>' +
+                        '</tr>'
+                    );
+                },
+                error: function () {
+
+                }
+            })
         });
 
     </script>
