@@ -207,9 +207,9 @@ class DefectsController extends Controller
         $query = DB::table('project')
             ->join('build', 'project.proj_id', '=', 'build.proj_id')
             ->join('task', 'build.build_id', '=', 'task.build_id')
-            ->where('build.build_id','!=',$buildID)
+            ->where('build.build_id','<',$buildID)
             ->where('project.proj_id','=',$projID)
-            ->groupBy('task.task_id')
+            //->groupBy('task.task_id')
             ->selectRaw('task.task_id as taskid, build.build_id as buildid, project.proj_id as projid')
             ->get();
 
