@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Defects;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -73,7 +74,7 @@ class DefectsController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->input(), array(
             'inputProjectId' =>'required',
             'inputBuildId' => 'required',
             'inputOrigRefNo' => 'required',
@@ -81,7 +82,14 @@ class DefectsController extends Controller
             'inputDefectCause' => 'required',
             'inputAreaCategory' => 'required',
             'inputRemarks' => 'required',
-        ]);
+        ));
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error'    => true,
+                'messages' => $validator->errors(),
+            ], 422);
+        }
 
         $buildData = new Defects;
         $buildData->task_id  = $request->inputBuildId;
@@ -93,7 +101,12 @@ class DefectsController extends Controller
 
         $buildData->save();
 
-        return redirect()->route('defects');
+        return response()->json([
+            'error' => false,
+            'task'  => $buildData,
+        ], 200);
+
+        //return redirect()->route('defects');
     }
 
     /**
@@ -105,6 +118,25 @@ class DefectsController extends Controller
     public function show($id)
     {
         //
+
+        $data = DB::table('defects')
+            ->join('task', 'defects.task_id', '=', 'task.task_id')
+            ->join('defect_cause', 'defects.defect_cause_id', '=', 'defect_cause.defect_cause_id')
+            ->join('defect_type', 'defects.defect_type_id', '=', 'defect_type.defect_type_id')
+            ->where('defects.orig_ref_id','=',$id)
+            ->groupBy('task.task_id')
+            ->selectRaw('defects.orig_ref_id as origtaskid, defects.task_id as taskid, task.name as descr , defect_type.desc_type as defecttypedescr, defect_cause.desc_cause as defectcausedescr, defects.area_category as area, defects.remarks as remarks, defects.created_at')
+            ->get();
+
+        //return response()->json($data);
+
+        return  view('defects-show',
+            [
+                'tasks' => $data,
+                'origtaskid' => $id
+            ]
+        );
+
     }
 
     /**
@@ -165,7 +197,6 @@ class DefectsController extends Controller
         $data = DB::table('project')
             ->join('build', 'project.proj_id', '=', 'build.proj_id')
             ->join('task', 'build.build_id', '=', 'task.build_id')
-            //->where('task.inc_type','!=','BUG')
             ->where('task.task_id','=',$id)
             ->groupBy('task.task_id')->selectRaw('task.task_id as taskid, build.build_id as buildid, project.proj_id as projid')
             ->first();

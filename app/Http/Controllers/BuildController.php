@@ -17,14 +17,11 @@ class BuildController extends Controller
      */
     public function index()
     {
-        //
 
         $buildData = DB::table('build')
             ->join('project', 'build.proj_id', '=', 'project.proj_id')
             ->select('build.*', 'project.proj_name')
             ->get();
-
-        //return response()->json($buildData);
 
         return view('build', ['builds' => $buildData]);
     }
@@ -46,27 +43,37 @@ class BuildController extends Controller
 
     public function store(Request $request)
     {
-        //
 
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->input(), array(
             'inputProject' => 'required',
-            'inputSP' => 'required',
-            'inputVS' => 'required',
-            'inputDrop' => 'required',
-            'inputDescr' => 'required',
-        ]);
+            'inputMajorId' => 'required',
+            'inputMinorId' => 'required',
+            'inputDropId' => 'required|unique:Build,drop_id,NULL,id,proj_id,'.$request->inputProject.',major_id,'.$request->inputMajorId.',minor_id,'.$request->inputMinorId,
+            'inputDescription' => 'required:max:255',
+        ));
 
+        if ($validator->fails()) {
+            return response()->json([
+                'error'    => true,
+                'messages' => $validator->errors(),
+            ], 422);
+        }
 
         $buildData = new Build;
         $buildData->proj_id  = $request->inputProject;
-        $buildData->major_id  = $request->inputSP;
-        $buildData->minor_id  = $request->inputVS;
-        $buildData->drop_id  = $request->inputDrop;
-        $buildData->descr  = $request->inputDescr;
+        $buildData->major_id  = $request->inputMajorId;
+        $buildData->minor_id  = $request->inputMinorId;
+        $buildData->drop_id  = $request->inputDropId;
+        $buildData->descr  = strtoupper($request->inputDescription);
 
         $buildData->save();
 
-        return redirect()->route('build');
+        //return redirect()->route('build');
+
+        return response()->json([
+            'error' => false,
+            'task'  => $buildData,
+        ], 200);
 
     }
 
@@ -96,15 +103,12 @@ class BuildController extends Controller
 
     public function edit($id)
     {
-        //
 
         $buildData = DB::table('build')
             ->join('project', 'build.proj_id', '=', 'project.proj_id')
             ->select('build.*', 'project.proj_name')
             ->where('build.build_id',$id)
             ->first();
-
-//        return response()->json($buildData);
 
         $projectData = DB::table('project')->get();
 
@@ -139,7 +143,6 @@ class BuildController extends Controller
 
         return redirect()->route('build');
 
-        /*return response()->json($request);*/
     }
 
     /**
@@ -150,7 +153,7 @@ class BuildController extends Controller
      */
     public function destroy($id)
     {
-        //
+
         $data = Build::findorfail($id);
         $data->delete();
 

@@ -38,18 +38,14 @@
                             <h3 class="card-title">Defects Details</h3>
                         </div>
                         <!-- /.card-header -->
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        <div class="alert alert-danger" id="add-error-bag" style="display: none">
+                            <strong>Whoops!</strong> There were some problems with your input.
+                            <ul id="add-task-errors">
+                            </ul>
+                        </div>
                         <!-- form start -->
-                        <form id="defectsadd" method="POST" action="{{route('defects.store')}}">
+                        <form id="defectsadd">
+{{--                            <form id="defectsadd" method="POST" action="{{route('defects.store')}}">--}}
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -150,6 +146,12 @@
             theme: 'bootstrap4'
         });
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $('body').on('change', '.btnProjectId', function () {
             var oThis = $(this);
             $.ajax({
@@ -193,6 +195,26 @@
             })
         });
 
+        $("#btn-submit").click(function(e){
+            e.preventDefault();
+            var data = $("#defectsadd").serialize();
+            $.ajax({
+                type:'POST',
+                url:'{{url('defects')}}',
+                data:data,
+                success: function(data) {
+                    window.location.href ='{{url('defects')}}';
+                },
+                error: function(data) {
+                    var errors = $.parseJSON(data.responseText);
+                    $('#add-task-errors').html('');
+                    $.each(errors.messages, function(key, value) {
+                        $('#add-task-errors').append('<li>' + value + '</li>');
+                    });
+                    $("#add-error-bag").show();
+                }
+            });
+        });
 
     </script>
 @endpush

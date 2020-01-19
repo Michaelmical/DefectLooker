@@ -19,7 +19,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                        <li class="breadcrumb-item active">Defects</li>
+                        <li class="breadcrumb-item"><a href="{{route('defects')}}">Defects</a></li>
+                        <li class="breadcrumb-item active">View</li>
                     </ol>
                 </div>
             </div>
@@ -28,9 +29,9 @@
     <section class="content">
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="card card-primary card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">List of Task with Defects</h3>
+                        <h3 class="card-title">Associated items for {{$origtaskid}}</h3>
                     </div>
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -38,9 +39,11 @@
                             <tr>
                                 <th>Task ID</th>
                                 <th>Description</th>
-                                <th>Total # of Defects</th>
-                                <th>Allowable Defects</th>
-                                <th>Actions</th>
+                                <th>Defect Type</th>
+                                <th>Defect Cause</th>
+                                <th>Area Found</th>
+                                <th>Remarks</th>
+                                <th>Create Date</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -48,13 +51,16 @@
                                 <tr>
                                     <td>{{$task->taskid}}</td>
                                     <td>{{$task->descr}}</td>
-                                    <td>{{$task->points}}</td>
-                                    <td>{{$task->allowable}}</td>
-                                    <td>
-                                        <a class="btn btn-info btn-sm" href="{{route('defects-show',['id'=>$task->taskid])}}">
-                                            <i class="fas fa-eye"></i> View
-                                        </a>
-                                    </td>
+                                    <td>{{$task->defecttypedescr}}</td>
+                                    <td>{{$task->defectcausedescr}}</td>
+                                    <td>{{$task->area}}</td>
+                                    <td>{{$task->remarks}}</td>
+                                    <td>{{$task->created_at}}</td>
+{{--                                    <td>--}}
+{{--                                        <a class="btn btn-info btn-sm" href="{{route('defects-show',['id'=>$task->taskid])}}">--}}
+{{--                                            <i class="fas fa-eye"></i> View--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
                                 </tr>
                             @endforeach
                             </tbody>
@@ -62,9 +68,11 @@
                             <tr>
                                 <th>Task ID</th>
                                 <th>Description</th>
-                                <th>Total # of Defects</th>
-                                <th>Allowable Defects</th>
-                                <th>Actions</th>
+                                <th>Defect Type</th>
+                                <th>Defect Cause</th>
+                                <th>Area Found</th>
+                                <th>Remarks</th>
+                                <th>Create Date</th>
                             </tr>
                             </tfoot>
                         </table>

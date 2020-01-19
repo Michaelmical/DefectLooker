@@ -29,69 +29,68 @@
         </div><!-- /.container-fluid -->
     </section>
     <section class="content">
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="card card-primary card-outline">
-            <div class="card-header">
-                <h3 class="card-title">Build Details</h3>
-            </div>
-
-            <form id="buildadd" method="POST" action="{{route('build.store')}}">
-                @csrf
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label>Projects</label>
-                                <select class="form-control select2bs4" style="width: 100%;" name="inputProject">
-                                    <option selected="selected" disabled="disabled" value="null"></option>
-                                    @foreach($projects as $project)
-                                        <option value="{{ $project->proj_id }}">{{ $project->proj_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Build Details</h3>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="inputSP">Major #</label>
-                                <input type="number" class="form-control" name="inputSP" placeholder="Enter SP..">
-                            </div>
+                        <div class="alert alert-danger" id="add-error-bag" style="display: none">
+                            <strong>Whoops!</strong> There were some problems with your input.
+                            <ul id="add-task-errors">
+                            </ul>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="inputVS">Minor #</label>
-                                <input type="number" class="form-control" name="inputVS" placeholder="Enter Version..">
+                        <form id="buildadd">
+                            @csrf
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Projects</label>
+                                            <select class="form-control select2bs4" style="width: 100%;" name="inputProject">
+                                                <option selected="selected" disabled="disabled" value="null"></option>
+                                                @foreach($projects as $project)
+                                                    <option value="{{ $project->proj_id }}">{{ $project->proj_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="inputSP">Major #</label>
+                                            <input type="number" class="form-control" name="inputMajorId" placeholder="Enter SP..">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="inputVS">Minor #</label>
+                                            <input type="number" class="form-control" name="inputMinorId" placeholder="Enter Version..">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="inputDrop">Drop #</label>
+                                            <input type="number" class="form-control" name="inputDropId" placeholder="Enter Drop..">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="inputDescr">Description</label>
+                                            <input type="text" class="form-control" name="inputDescription" placeholder="e.g (PROJECT#.#DROP#)">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="inputDrop">Drop #</label>
-                                <input type="number" class="form-control" name="inputDrop" placeholder="Enter Drop..">
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary" id="btn-submit">Add Build</button>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <label for="inputDescr">Description</label>
-                                <input type="text" class="form-control" name="inputDescr" placeholder="e.g (PROJECT#.#DROP#)">
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary" id="btn-submit">Add Build</button>
-                </div>
-            </form>
+            </div>
         </div>
     </section>
 @endsection
@@ -118,6 +117,28 @@
         $('#datemask2').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
         //Money Euro
         $('[data-mask]').inputmask()
+
+        $("#btn-submit").click(function(e){
+            e.preventDefault();
+            var data = $("#buildadd").serialize();
+            $.ajax({
+                type:'POST',
+                url:'{{url('build')}}',
+                data:data,
+                success: function(data) {
+                    window.location.href ='{{url('build')}}';
+                },
+                error: function(data) {
+                    var errors = $.parseJSON(data.responseText);
+                    $('#add-task-errors').html('');
+                    $.each(errors.messages, function(key, value) {
+                        $('#add-task-errors').append('<li>' + value + '</li>');
+                    });
+                    $("#add-error-bag").show();
+                }
+            });
+        });
+
     </script>
 @endpush
 

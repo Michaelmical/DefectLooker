@@ -17,6 +17,7 @@ Route::post('post-registration', 'AuthController@postRegistration');
 Route::get('/logout',            'AuthController@logout')->name('logout');
 
 Route::get('/dashboard',         'DashboardController@index')->name('dashboard');
+Route::get('/showLineChart',     'DashboardController@showLineChart')->name('dashboard.showLineChart');
 
 Route::get('/tasks',               'TaskController@index')->middleware('check.exist.session')->name('tasks');
 Route::get('/tasks/create',        'TaskController@create')->name('tasks-create');
@@ -59,6 +60,7 @@ Route::get('complex/{id}',      'ComplexController@show')->name('complex-show');
 Route::get('defects', 'DefectsController@index')->name('defects');
 Route::get('defects/create', 'DefectsController@create')->name('defects-create');
 Route::get('defects/{id}/build', 'DefectsController@build')->name('defects.build');
+Route::get('defects/{id}', 'DefectsController@show')->name('defects-show');
 Route::get('defects/{id}/original', 'DefectsController@original')->name('defects.original');
 Route::post('defects', 'DefectsController@store')->name('defects.store');
 

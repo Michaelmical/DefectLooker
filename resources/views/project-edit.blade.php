@@ -39,18 +39,14 @@
                         </div>
                         <!-- /.card-header -->
 
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        <div class="alert alert-danger" id="add-error-bag" style="display: none">
+                            <strong>Whoops!</strong> There were some problems with your input.
+                            <ul id="add-task-errors">
+                            </ul>
+                        </div>
                         <!-- form start -->
-                        <form id="projectUpdate" method="POST" action="{{route('project.update',['id'=>$project->proj_id])}}">
+{{--                        <form id="projectUpdate" method="POST" action="{{route('project.update',['id'=>$project->proj_id])}}">--}}
+                        <form id="projectUpdate">
                             @method('PUT')
                             @csrf
                             <div class="card-body">
@@ -65,7 +61,8 @@
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary" id="btn-submit">Update Project</button>
+                                <input id="projid" name="projid" type="hidden" value="{{$project->proj_id}}">
+                                <button class="btn btn-primary" id="btn-submit">Update Project</button>
                             </div>
                         </form>
                     </div>
@@ -75,4 +72,39 @@
         </div>
     </section>
 @endsection
+@push('addons')
+    <script>
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $("#btn-submit").click(function(e){
+            e.preventDefault();
+
+            var data = $("#projectUpdate").serialize();
+            var projId = $('input[name=projid]').val();
+
+            $.ajax({
+                type:'POST',
+                url:'/project/' + projId,
+                data:data,
+                success: function(data) {
+                    window.location.href ='{{url('project')}}';
+                },
+                error: function(data) {
+                    var errors = $.parseJSON(data.responseText);
+                    $('#add-task-errors').html('');
+                    $.each(errors.messages, function(key, value) {
+                        $('#add-task-errors').append('<li>' + value + '</li>');
+                    });
+                    $("#add-error-bag").show();
+                }
+            });
+
+        });
+    </script>
+@endpush
 

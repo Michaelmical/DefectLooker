@@ -38,17 +38,11 @@
                             <h3 class="card-title">Project Details</h3>
                         </div>
                         <!-- /.card-header -->
-
-                        @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                        <div class="alert alert-danger" id="add-error-bag" style="display: none">
+                            <strong>Whoops!</strong> There were some problems with your input.
+                            <ul id="add-task-errors">
+                            </ul>
+                        </div>
                         <!-- form start -->
                         <form id="projectAdd" method="POST" action="{{route('project.store')}}">
                             @csrf
@@ -74,4 +68,36 @@
         </div>
     </section>
 @endsection
+@push('addons')
+    <script>
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $("#btn-submit").click(function(e){
+            e.preventDefault();
+            var data = $("#projectAdd").serialize();
+            $.ajax({
+                type:'POST',
+                url:'{{url('project')}}',
+                data:data,
+                success: function(data) {
+                    window.location.href ='{{url('project')}}';
+                },
+                error: function(data) {
+                    var errors = $.parseJSON(data.responseText);
+                    $('#add-task-errors').html('');
+                    $.each(errors.messages, function(key, value) {
+                        $('#add-task-errors').append('<li>' + value + '</li>');
+                    });
+                    $("#add-error-bag").show();
+                }
+            });
+        });
+    </script>
+@endpush
+
 

@@ -117,27 +117,6 @@
         $(document).ready(function () {
             bsCustomFileInput.init();
         });
-        {{--$.ajaxSetup({--}}
-        {{--    headers: {--}}
-        {{--        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-        {{--    }--}}
-        {{--});--}}
-        {{--$('#btn-submit').click(function (e) {--}}
-        {{--    e.preventDefault();--}}
-        {{--    $(this).html('Adding..');--}}
-        {{--    $.ajax({--}}
-        {{--        data: $('#buildadd').serialize(),--}}
-        {{--        url: "{{ route('build.store') }}",--}}
-        {{--        type: "POST",--}}
-        {{--        dataType: 'json',--}}
-        {{--        success: function (data) {--}}
-        {{--            console.log(data);--}}
-        {{--        },--}}
-        {{--        error: function (data) {--}}
-        {{--            console.log('Error:', data);--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--});--}}
 
     </script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
