@@ -64,4 +64,10 @@ class DashboardController extends Controller
             'actual' => $aActual
         ]);
     }
+
+    public function showBarChart(Request $request)
+    {
+        $iProjID = $request->get('iProjID');
+    }
+
 }
