@@ -47,17 +47,30 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'iBuildId'       => 'required',
-            'iEmpId'         => 'required',
-            'sTaskId'        => 'required',
-            'sIncType'       => 'required',
-            'sSeverity'      => 'required',
-            'sStartDate'     => 'required',
-            'sCompletedDate' => 'required',
-            'sDesc'          => 'required'
-        ]);
+        if (session()->get('grpid') === 1) {
+            request()->validate([
+                'iBuildId'       => 'required',
+                'iEmpId'         => 'required',
+                'sTaskId'        => 'required',
+                'sIncType'       => 'required',
+                'sSeverity'      => 'required',
+                'sStartDate'     => 'required',
+                'sCompletedDate' => 'required',
+                'sDesc'          => 'required'
+            ]);
+        } else {
+            request()->validate([
+                'iBuildId'       => 'required',
+                'sTaskId'        => 'required',
+                'sIncType'       => 'required',
+                'sSeverity'      => 'required',
+                'sStartDate'     => 'required',
+                'sCompletedDate' => 'required',
+                'sDesc'          => 'required'
+            ]);
+        }
 
+        $iEmpid = session()->get('grpid') === 1 ? $request->get('iEmpId') : session()->get('empid');
         $aData = Task::create([
             'task_id'      => $request->get('sTaskId'),
             'name'         => $request->get('sDesc'),
@@ -65,7 +78,7 @@ class TaskController extends Controller
             'severity'     => $request->get('sSeverity'),
             'started_at'   => $request->get('sStartDate'),
             'completed_at' => $request->get('sCompletedDate'),
-            'emp_id'       => $request->get('iEmpId'),
+            'emp_id'       => $iEmpid,
             'build_id'     => (int)$request->get('iBuildId')
         ]);
 
@@ -131,17 +144,30 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task, $taskid)
     {
-        request()->validate([
-            'iBuildId'       => 'required',
-            'iEmpId'         => 'required',
-            'sTaskId'        => 'required',
-            'sIncType'       => 'required',
-            'sSeverity'      => 'required',
-            'sStartDate'     => 'required',
-            'sCompletedDate' => 'required',
-            'sDesc'          => 'required'
-        ]);
+        if (session()->get('grpid') === 1) {
+            request()->validate([
+                'iBuildId'       => 'required',
+                'iEmpId'         => 'required',
+                'sTaskId'        => 'required',
+                'sIncType'       => 'required',
+                'sSeverity'      => 'required',
+                'sStartDate'     => 'required',
+                'sCompletedDate' => 'required',
+                'sDesc'          => 'required'
+            ]);
+        } else {
+            request()->validate([
+                'iBuildId'       => 'required',
+                'sTaskId'        => 'required',
+                'sIncType'       => 'required',
+                'sSeverity'      => 'required',
+                'sStartDate'     => 'required',
+                'sCompletedDate' => 'required',
+                'sDesc'          => 'required'
+            ]);
+        }
 
+        $iEmpid = session()->get('grpid') === 1 ? $request->get('iEmpId') : session()->get('empid');
         $aData = $task->where('task_id', $taskid)->first();
         $aData->name =  $request->get('sDesc');
         $aData->inc_type =  $request->get('sIncType');
@@ -149,7 +175,7 @@ class TaskController extends Controller
         $aData->started_at =  $request->get('sStartDate');
         $aData->completed_at =  $request->get('sCompletedDate');
         $aData->build_id =  $request->get('iBuildId');
-        $aData->emp_id =  $request->get('iEmpId');
+        $aData->emp_id =  $iEmpid;
         $aData->save();
 
         return response()->json($aData);

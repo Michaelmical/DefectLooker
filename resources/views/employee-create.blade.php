@@ -15,61 +15,54 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
-                    <!-- general form elements -->
-                    <div class="card card-primary">
+
+                    <div class="card card-primary card-outline">
+
                         <div class="card-header">
                             <h3 class="card-title">Employee Details</h3>
                         </div>
-                        <!-- /.card-header -->
-{{--                        @if ($message = Session::get('success'))--}}
-{{--                            <div class="alert alert-success alert-block">--}}
-{{--                                <button type="button" class="close" data-dismiss="alert">×</button>--}}
-{{--                                <strong>{{ $message }}</strong>--}}
-{{--                            </div>--}}
-{{--                            <img src="{{url('images')}}/{{ Session::get('image') }}">--}}
-{{--                        @endif--}}
 
-{{--                        @if (count($errors) > 0)--}}
-{{--                            <div class="alert alert-danger">--}}
-{{--                                <strong>Whoops!</strong> There were some problems with your input.--}}
-{{--                                <ul>--}}
-{{--                                    @foreach ($errors->all() as $error)--}}
-{{--                                        <li>{{ $error }}</li>--}}
-{{--                                    @endforeach--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                    @endif--}}
-                        <!-- form start -->
-                        <form id="employeeadd">
+                        <form id="employeeadd" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
+                                <div class="alert alert-danger d-none" id="add-error-bag">
+                                    <strong>Whoops!</strong> There were some problems with your input.
+                                    <ul id="add-task-errors">
+                                    </ul>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputEmpNo">Employee Number</label>
-                                            <input type="number" class="form-control" name="inputEmpNo" placeholder="Enter employee number..">
+                                            <input type="number" minlength="10" maxlength="10" class="form-control" name="EmployeeNumber" placeholder="Enter employee number..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputLastName">Last Name</label>
-                                            <input type="text" class="form-control" name="inputLastName" placeholder="Enter last name..">
+                                            <input type="text" class="form-control" name="LastName" placeholder="Enter last name..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputFirstName">First Name</label>
-                                            <input type="text" class="form-control" name="inputFirstName" placeholder="Enter first name..">
+                                            <input type="text" class="form-control" name="FirstName" placeholder="Enter first name..">
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label for="inputMiddleName">Middle Name</label>
-                                            <input type="text" class="form-control" name="inputMiddleName" placeholder="Enter middle name..">
+                                            <input type="text" class="form-control" name="MiddleName" placeholder="Enter middle name..">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label for="inputMiddleName">Nickname</label>
+                                            <input type="text" class="form-control" name="Nickname" placeholder="Enter nickname..">
+                                        </div>
+                                    </div>
                                     <div class="col-sm-3">
                                         <div class="form-group">
                                             <label>Birthdate</label>
@@ -77,24 +70,38 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                                                 </div>
-                                                <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
+                                                <input type="text" name="BirthDate" class="form-control" data-inputmask-alias="datetime" id="bDate" data-inputmask-inputformat="yyyy/mm/dd" data-mask>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <!-- <label for="customFile">Custom File</label> -->
-                                            <label for="exampleInputFile">File Upload</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" name="image">
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                            <label for="exampleInputFile">Image Upload</label>
+                                            <div class="custom-file text-break">
+                                                <input type="file" accept="image/*" class="custom-file-input text-break" id="ImageUpload" name="ImageUpload">
+                                                <label class="custom-file-label text-break" for="customFile">Choose file</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" name="Email" placeholder="Enter email..">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="text" class="form-control" name="Password" placeholder="Enter password.." value="{{ substr(sha1(time()), 0, 10) }}">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
+                            <div class="card-footer mb-n3">
                                 <button type="submit" class="btn btn-primary" id="btn-submit">Add Employee</button>
                             </div>
                         </form>
@@ -117,21 +124,37 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $('#btn-submit').click(function (e) {
+        $('#employeeadd').on('submit', function (e) {
             e.preventDefault();
-            $(this).html('Adding..');
             $.ajax({
-                data: $('#employeeadd').serialize(),
-                url: "{{ route('employee.store') }}",
-                type: "POST",
-                dataType: 'json',
+                url: '{{ route('employee.store') }}',
+                type: 'POST',
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
                 success: function (data) {
-                    console.log(data);
+                    $("#add-error-bag").addClass('d-none');
+                    $('#add-task-errors').empty();
+                    alert(data.message);
+                    location.href = '/employee';
                 },
-                error: function (data) {
-                    console.log('Error:', data);
+                error : function (response) {
+                    var errors = $.parseJSON(response.responseText);
+                    $('#add-task-errors').empty();
+                    $.each(errors.messages, function(key, value) {
+                        $('#add-task-errors').append('<li>' + value + '</li>');
+                    });
+                    $("#add-error-bag").removeClass('d-none');
                 }
             });
+        });
+
+        $('#bDate').daterangepicker({
+            singleDatePicker: true,
+            locale: {
+                format: 'YYYY/MM/DD'
+            }
         });
 
     </script>

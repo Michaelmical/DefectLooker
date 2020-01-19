@@ -32,14 +32,12 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link text-dark" data-toggle="dropdown" href="#">
-                    {{ ucfirst(session('full_name')) }}
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="min-width: 200px; max-width: 220px;">
-{{--                    <span class="dropdown-item dropdown-header"></span>--}}
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-user-circle mr-2"></i> Account
+                <a class="nav-link text-dark" data-toggle="dropdown" href="#">{{ ucfirst(session('full_name')) }}</a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="min-width: 180px; max-width: 220px;">
+                        <a href="#" class="dropdown-item text-center">
+                            <img class="img-circle img-bordered img-fluid" src="/images/{{ session()->get('userImage') }}">
                         </a>
+                    <div class="dropdown-divider"></div>
                     <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
                             <i class="fas fa-lock mr-2"></i> Change Password
@@ -55,7 +53,7 @@
     </nav>
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <a href="{{ route('dashboard') }}" class="brand-link mt-1">
+        <a href="{{ route('dashboard') }}" class="brand-link mt-1 ml-1">
             <img src="{{ asset('dist/img/buglogo.jpg') }}" alt="Defect LOOKER Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Defect Looker</span>
@@ -72,8 +70,8 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview {{ (Route::is(['build', 'employee'])) ? 'menu-open' : '' }} {{ (session('grpid') === 1) ? '' : 'd-none' }}">
-                        <a href="#" class="nav-link {{ (Route::is(['build', 'employee'])) ? 'active' : '' }}">
+                    <li class="nav-item has-treeview {{ (Route::is(['build', 'employee', 'project'])) ? 'menu-open' : '' }} {{ (session('grpid') === 1) ? '' : 'd-none' }}">
+                        <a href="#" class="nav-link {{ (Route::is(['build', 'employee', 'project'])) ? 'active' : '' }}">
                             <i class="nav-icon fas fa-cog"></i>
                             <p>
                                 Setup
@@ -184,7 +182,7 @@
         <strong>Copyright &copy; 2019-2020
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0.1
+                <b>Version</b> 1.0
             </div>
         </strong>
     </footer>

@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <form role="form">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 {{ (session('grpid') === 1) ? '' : 'd-none' }}">
                                     <div class="form-group">
                                         <label>Employee</label>
                                         <select class="form-control select2bs4" style="width: 100%;" id="optEmployee">
@@ -46,7 +46,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Task ID</label>
-                                        <input type="text" class="form-control" placeholder="e.g (ENH#####, TSK######, BUG#####)" id="txtTaskId">
+                                        <input type="text" maxlength="8" class="form-control" placeholder="e.g (ENH#####, TSK######, BUG#####)" id="txtTaskId">
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +135,19 @@
         //Datemask2 yyyy/mm/dd
         $('#datemask2').inputmask('yyyy/mm/dd', { 'placeholder': 'yyyy/mm/dd' });
         //Money Euro
-        $('[data-mask]').inputmask()
+        $('[data-mask]').inputmask();
+
+        $('#dtStarted').daterangepicker({
+            singleDatePicker: true,
+            locale: {
+                format: 'YYYY/MM/DD'
+            }
+        });
+        $('#dtCompleted').daterangepicker({
+            singleDatePicker: true,
+            locale: {
+                format: 'YYYY/MM/DD'
+            }
+        });
     </script>
 @endpush
